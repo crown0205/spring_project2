@@ -11,11 +11,8 @@ import PostWrite from "../pages/PostWrite";
 import PostDetail from "../pages/PostDetail";
 import Footer from "../components/Footer";
 
-import { Button } from "../elements/index"
-import { useHistory } from "react-router-dom";
-
 function App() {
-  const history = useHistory()
+
   return (
     <React.Fragment>
       <BrowserRouter>
@@ -26,13 +23,6 @@ function App() {
         <Route path="/write" exact component={PostWrite} />
         <Route path="/detail" exact component={PostDetail} />
         <Footer />
-        <Button
-          is_float
-          text="+"
-          _onClick={() => {
-            history.push("/write");
-          }}
-        ></Button>
       </BrowserRouter>
     </React.Fragment>
   );
