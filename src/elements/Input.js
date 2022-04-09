@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-import {Text} from "./index"
+import { Text } from "./index";
 
-const Input = props => {
-  const { label, type, value, placeholder, _onChange, onSubmit, is_submit} =
+const Input = (props) => {
+  const { label, type, value, placeholder, _onChange, onSubmit, is_submit } =
     props;
 
   return (
     <React.Fragment>
       <div>
-        <Text>{label? label:"텍스트"}</Text>
+        {label && <Text>{label}</Text>}
         <InputBox type={type} placeholder={placeholder} onChange={_onChange} />
       </div>
     </React.Fragment>
