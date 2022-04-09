@@ -21,7 +21,7 @@ function App() {
         <Route path="/" exact component={Main} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
-        <Route path="/write" exact component={PostWrite} />
+        <Route path="/posts" exact component={PostWrite} />
         <Route path="/detail" exact component={PostDetail} />
         <Footer />
         </Grid>

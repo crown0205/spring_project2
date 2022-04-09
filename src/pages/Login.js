@@ -5,9 +5,9 @@ import { Input, Grid, Text, Button } from "../elements/index";
 const Login = (props) => {
   return (
     <React.Fragment>
-      <Grid bg="#ddd">
+      <Grid>
         <Grid
-          padding="16px 0"
+          padding="120px 0px"
           width="40%"
           height="78vh"
           margin="auto"

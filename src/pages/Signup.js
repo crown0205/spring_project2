@@ -5,8 +5,8 @@ import { Input, Grid, Text, Button } from "../elements/index";
 const Signup = (props) => {
   return (
     <React.Fragment>
-      <Grid bg="#ddd" height="75vh">
-        <Grid width="40%" height="900px" padding="16px " margin="auto" bg="#fff">
+      <Grid height="75vh">
+        <Grid width="40%" height="900px" padding="120px 20px 0px 20px" margin="auto" bg="#fff">
           <Text size="30px" Fw="600" center margin="50px 0">
             회원가입
           </Text>

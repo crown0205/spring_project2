@@ -48,7 +48,7 @@ const Header = (props) => {
   return (
     <React.Fragment>
       <Grid bg="#ffe0e0" is_flex fixed height="0px">
-        <Grid is_flex padding="3px 16px" width="40%" margin="auto" bg="#ffe0e0">
+        <Grid is_flex padding="3px 16px" width="55%" margin="auto" bg="#ffe0e0">
           <Grid>
             <Text margin="15px" size="20px" bold>
               <Font
@@ -63,23 +63,29 @@ const Header = (props) => {
               </Font>
             </Text>
           </Grid>
-          <Grid width="auto" is_flex>
-            <Button
-              text="글 작성"
-              width="90px"
-              _onClick={() => {
-                history.push("/write");
-              }}
-            ></Button>
-
-            <Button
-              text="로그아웃"
-              width="90px"
-              _onClick={() => {
-                history.replace("/");
-              }}
-            ></Button>
-          </Grid>
+          <Grid is_flex>
+            <Grid margin="0px 0px 0px 100px">
+              <Text>user_name님 환영합니다</Text>
+            </Grid>
+            <Grid margin="0px 2px 0px 0px">
+                <Button
+                  text="글 작성"
+                  width="90px"
+                  margin="0px 4px 0px 0px"
+                  _onClick={() => {
+                    history.push("/write");
+                  }}
+                ></Button>
+                <Button
+                  text="로그아웃"
+                  width="90px"
+                  _onClick={() => {
+                    history.replace("/");
+                  }}
+                ></Button>
+              </Grid>
+              
+            </Grid>
         </Grid>
       </Grid>
     </React.Fragment>

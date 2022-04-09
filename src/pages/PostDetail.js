@@ -6,7 +6,7 @@ import CommentList from "../components/CommentList";
 const PostDetail = props => {
   return (
     <React.Fragment>
-      <Grid bg="#ddd">
+      <Grid padding="120px 0px">
         <Grid margin="auto" width="40%" bg="#fff" padding="50px 20px">
           <Text Fw="600" size="34px" margin="0 0 5px 0">글 제목</Text>
           <Text size="14px" color="#8b8b8b">

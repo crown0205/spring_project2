@@ -8,14 +8,18 @@ import {Grid, Text, Input, Button,Image} from "../elements/index";
 const PostWrite = ()=>{
     return(
         <React.Fragment>
-            <Grid bg="#ddd" Minh="75vh">
+            <Grid Minh="75vh">
                 <Grid margin="auto" width="40%" bg="#fff">
-                    <Grid padding="20px" center>
-                        <Text margin="20px" size="25px" Fw="600">게시글 작성</Text>
+                    <Grid padding="140px 20px 20px 20px" center>
+                        <Text margin="20px 0px 40px 0px" size="25px" Fw="600">게시글 작성</Text>
                         <Input placeholder="제목을 입력해주세요."/>
                     </Grid>
+                    <Grid padding="0px 20px 20px 20px">
+                        <Upload/>
+                    </Grid> 
                     {/* 이미지 미리보기 */}
-                    <Grid padding="0px 0px 30px 0px">
+                    <Grid padding="0px 20px 30px 20px">
+                       
                         <Image shape="rectangle" src="https://s3.ap-northeast-2.amazonaws.com/yk0825.shop/imageupload.jpg"></Image>
                     </Grid>
                     <Grid padding="16px">
