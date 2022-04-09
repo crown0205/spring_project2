@@ -8,7 +8,7 @@ const Grid = props => {
     props;
 
   const styles = {
-    is_flex:is_flex,
+    is_flex,
     width,
     margin,
     padding,
@@ -17,7 +17,6 @@ const Grid = props => {
     height,
     Minw,
     Maxw,
-    is_flex,
   };
 
   return (
