@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Image = props => {
+const Image = (props) => {
   const { shape, src, size } = props;
   const styles = {
     src,
@@ -35,7 +35,7 @@ const RectangleInner = styled.div`
   padding-top: 50%;
   overflow: hidden;
 
-  background-image: url("${props => props.src}");
+  background-image: url("${(props) => props.src}");
   background-size: cover;
 `;
 const CircleImage = styled.div`
@@ -43,7 +43,7 @@ const CircleImage = styled.div`
   width: var(--size);
   height: var(--size);
   border-radius: var(--size);
-  background-image: url("${props => props.src}");
+  background-image: url("${(props) => props.src}");
   margin: 4px;
 `;
 

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Text, Grid } from "./index";
 
-const Input = props => {
+const Input = (props) => {
   const {
     label,
     type,
@@ -41,7 +41,12 @@ const Input = props => {
     <React.Fragment>
       <div>
         {label && <Text>{label}</Text>}
-        <InputBox type={type} placeholder={placeholder} onChange={_onChange} />
+        <InputBox
+          type={type}
+          placeholder={placeholder}
+          onChange={_onChange}
+          {...styles}
+        />
       </div>
     </React.Fragment>
   );
@@ -68,11 +73,11 @@ const TextareaBox = styled.textarea`
 
 const InputBox = styled.input`
   border: 1px solid #212121;
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   padding: 12px 4px;
   box-sizing: border-box;
-  ${props => props.left && `float: left;`}
+  ${(props) => props.left && `float: left;`}
 `;
 
 export default Input;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Button, Text, Input, Image } from "../elements/index";
 
-const PostDetail = props => {
+const PostDetail = (props) => {
   return (
     <React.Fragment>
       <Grid bg="#aaa" width="100%" height="100.3vw">
@@ -18,7 +18,7 @@ const PostDetail = props => {
           <Grid margin="50px 0">
             <Grid>
               <Image
-                shape="ractangle"
+                shape="rectangle"
                 src="https://i.pinimg.com/564x/ca/02/94/ca0294f0578167fcdf6df476d4645772.jpg"
                 alt=""
                 width="100%"
@@ -46,9 +46,7 @@ const PostDetail = props => {
               <Grid bg="#eeeeee">
                 <Text>user_name</Text>
               </Grid>
-              <Grid>
-                comment
-              </Grid>
+              <Grid>comment</Grid>
             </Grid>
           </Grid>
 
