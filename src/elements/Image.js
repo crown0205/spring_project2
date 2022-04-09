@@ -10,7 +10,7 @@ const Image = (props) => {
   if (shape === "circle") {
     return <CircleImage {...styles}></CircleImage>;
   }
-  if (shape === "ractangle") {
+  if (shape === "rectangle") {
     return (
       <RectangleOutter>
         <RectangleInner {...styles}></RectangleInner>
