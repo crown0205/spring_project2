@@ -1,7 +1,7 @@
 import React from "react";
 // import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-
+import {Grid} from "../elements/index"
 // import { actionCreator as postActions } from "../redux/modules/post";
 
 import Card from "../components/Card";
@@ -19,22 +19,26 @@ const Main = () => {
 
   return (
     <React.Fragment>
-      <MainWrap>
-        {/* <Menu /> */}
-        <PostList>
-          {/* {post_list.map((p, id) => {
-            return <Post key={id} {...p} />;
-          })} */}
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-        </PostList>
-      </MainWrap>
+      <Grid bg="#ddd">
+        <Grid width="40%" margin="auto" bg="#fff">
+          <MainWrap>
+            {/* <Menu /> */}
+            <PostList>
+              {/* {post_list.map((p, id) => {
+                return <Post key={id} {...p} />;
+              })} */}
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+            </PostList>
+          </MainWrap>
+        </Grid>
+      </Grid>
     </React.Fragment>
   );
 };
