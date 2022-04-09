@@ -32,7 +32,7 @@ const Input = (props) => {
   return (
     <React.Fragment>
       <div>
-        {label && <Text>{label}</Text>}
+        {label && <Text>{label}</Text>} 
         <InputBox type={type} placeholder={placeholder} onChange={_onChange} />
       </div>
     </React.Fragment>
