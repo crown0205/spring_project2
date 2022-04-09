@@ -17,7 +17,11 @@ const Card = (props) => {
         <Grid padding="16px"></Grid>
       </Grid> */}
       <Grid>
-        <Image shape="rectangle"></Image>
+        <Grid padding="16px"></Grid>
+        <Grid>
+          <Image shape="rectangle" src={props.src} />
+        </Grid>
+        <Grid padding="16px">제목을 입력하세요</Grid>
       </Grid>
     </React.Fragment>
   );
