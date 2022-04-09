@@ -1,14 +1,15 @@
 import React from "react";
 import { Grid, Button, Text, Input, Image } from "../elements/index";
 
+import CommentWrite from "../components/CommentWrite";
+import CommentList from "../components/CommentList";
 const PostDetail = props => {
   return (
     <React.Fragment>
       <Grid bg="#ddd">
-        <Grid margin="auto" width="40%" bg="#fff" padding="50px 16px">
-          <Text Fw="600" size="34px" margin="0 0 5px 0">
-            이것은 테스트 하는 곳입니다.
-          </Text>
+
+        <Grid margin="auto" width="40%" bg="#fff" padding="50px 20px">
+          <Text Fw="600" size="34px" margin="0 0 5px 0">글 제목</Text>
           <Text size="14px" color="#8b8b8b">
             user_name | <span>2022-04-09 10:00:00</span>
           </Text>
@@ -25,33 +26,19 @@ const PostDetail = props => {
             </Grid>
           </Grid>
 
-          <Grid>{/* comtents */}</Grid>
-
-          <Grid width="100%">
-            {/* comments write */}
-            <Input width="80%" left />
-            <Button
-              text="게시"
-              width="20%"
-              padding="10px"
-              height="41.7px"
-            ></Button>
+          <Grid margin="0px 0px 50px 0px">
+            <Text>PostWrite.js에서 작성한 input 내용</Text>
           </Grid>
-
-          <Grid>
-            {/* comments */}
-            <Grid>
-              <Grid bg="#eeeeee">
-                <Text>user_name</Text>
-              </Grid>
-              <Grid>
-                comment
-              </Grid>
-            </Grid>
+          <hr/>
+          <Grid margin="16px 0px 0px 0px" padding="10px 0px 0px 0px" bg="#ffeae4">
+            {/* 댓글 작성 */}
+            <CommentWrite/>
+            {/* 댓글 목록 */}
+            <CommentList/>
+            
           </Grid>
-
-          <Grid>{/* btn */}</Grid>
         </Grid>
+
       </Grid>
     </React.Fragment>
   );
