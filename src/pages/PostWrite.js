@@ -11,7 +11,7 @@ const PostWrite = ()=>{
             <Grid bg="#ddd">
                 <Grid margin="auto" width="40%" bg="#fff">
                     <Grid padding="20px" center>
-                        <Text margin="20px 0 25px 0" size="25px" Fw="600">게시글 작성</Text>
+                        <Text margin="16px 0 25px 0" size="25px" Fw="600">게시글 작성</Text>
 
                         {/* 제목 */}
                         <Grid margin="0 0 16px 0">
@@ -23,7 +23,7 @@ const PostWrite = ()=>{
                     </Grid>
                     {/* 이미지 미리보기 */}
                     <Grid padding="0px 16px 30px 16px">
-                        <Image shape="ractangle" src="https://s3.ap-northeast-2.amazonaws.com/yk0825.shop/imageupload.jpg"></Image>
+                        <Image shape="rectangle" src="https://s3.ap-northeast-2.amazonaws.com/yk0825.shop/imageupload.jpg"></Image>
                     </Grid>
                     <Grid padding="16px">
                         <Input label="" placeholder="내용을 입력해 주세요." multiLine></Input>
