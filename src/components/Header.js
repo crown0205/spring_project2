@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import { Grid, Text, Button } from "../elements";
 import { useHistory } from "react-router-dom";
@@ -12,20 +13,20 @@ const Header = (props) => {
   //       <Grid is_flex padding="3px 16px" width="40%" margin="auto" bg="#ffe0e0">
   //         <Grid>
   //           <Text margin="0px" size="25px" bold>
-  //             <span
+  //             <F
   //               onClick={() => {
   //                 console.log("home");
   //                 history.replace("/");
   //               }}
   //             >
   //               올봄엔
-  //             </span>
+  //             </F>
   //           </Text>
   //         </Grid>
   //         <Grid width="auto" is_flex>
   //           <Button
   //             text="로그인"
-  //             width="auto"
+  //             width="90px"
   //             _onClick={() => {
   //               console.log("됨??");
   //               history.push("/login");
@@ -33,7 +34,7 @@ const Header = (props) => {
   //           ></Button>
   //           <Button
   //             text="회원가입"
-  //             width="auto"
+  //             width="90px"
   //             _onClick={() => {
   //               history.push("/signup");
   //             }}
@@ -49,28 +50,31 @@ const Header = (props) => {
       <Grid bg="#ffe0e0" is_flex fixed height="0px">
         <Grid is_flex padding="3px 16px" width="40%" margin="auto" bg="#ffe0e0">
           <Grid>
-            <Text margin="15px" size="25px" bold>
-              <span
+            <Text margin="15px" size="20px" bold>
+              <Font
                 onClick={() => {
                   console.log("home");
                   history.replace("/");
                 }}
               >
+                <span>🌸</span>
                 올봄엔
-              </span>
+                <span>🌸</span>
+              </Font>
             </Text>
           </Grid>
           <Grid width="auto" is_flex>
             <Button
               text="글 작성"
-              width="auto"
+              width="90px"
               _onClick={() => {
                 history.push("/write");
               }}
             ></Button>
+
             <Button
               text="로그아웃"
-              width="auto"
+              width="90px"
               _onClick={() => {
                 history.replace("/");
               }}
@@ -81,6 +85,10 @@ const Header = (props) => {
     </React.Fragment>
   );
 };
+
+const Font = styled.div`
+  font-family: "Jalnan";
+`;
 
 Header.defaultProps = {};
 

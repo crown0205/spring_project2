@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Text, Grid } from "./index";
 
-const Input = props => {
+const Input = (props) => {
   const {
     label,
     type,
@@ -27,7 +27,7 @@ const Input = props => {
   if (multiLine) {
     return (
       <Grid>
-        {label && <Text margin="0px">{label}</Text>}
+        <Font>{label && <Text margin="0px">{label}</Text>}</Font>
         <TextareaBox
           rows={10}
           placeholder={placeholder}
@@ -40,8 +40,13 @@ const Input = props => {
   return (
     <React.Fragment>
       <div>
-        {label && <Text>{label}</Text>}
-        <InputBox type={type} placeholder={placeholder} onChange={_onChange} {...styles}/>
+        <Font>{label && <Text>{label}</Text>}</Font>
+        <InputBox
+          type={type}
+          placeholder={placeholder}
+          onChange={_onChange}
+          {...styles}
+        />
       </div>
     </React.Fragment>
   );
@@ -64,15 +69,21 @@ const TextareaBox = styled.textarea`
   width: 100%;
   padding: 12px 4px;
   box-sizing: border-box;
+  font-family: "Jalnan";
 `;
 
 const InputBox = styled.input`
   border: 1px solid #212121;
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   padding: 12px 4px;
   box-sizing: border-box;
-  ${props => props.left && `float: left;`}
+  ${(props) => props.left && `float: left;`}
+  font-family: "Jalnan";
+`;
+
+const Font = styled.div`
+  font-family: "Jalnan";
 `;
 
 export default Input;
