@@ -11,8 +11,8 @@ import Card from "../components/Card";
 const Main = () => {
   return (
     <React.Fragment>
-      <Grid bg="#ddd">
-        <Grid width="40%" margin="auto" bg="#fff">
+      <Grid bg="#ddd" Minh="75vh">
+        <Grid width="40%" margin="auto" bg="#fff" >
           <MainWrap>
             {/* <Menu /> */}
             <PostList>

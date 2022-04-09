@@ -8,7 +8,7 @@ const Login = props => {
 
       <React.Fragment>
         <Grid bg="#ddd">
-        <Grid padding="16px 0" width="40%" margin="auto" bg="#ffffff">
+        <Grid padding="16px 0" width="40%" height="78vh" margin="auto" bg="#ffffff">
           <Grid width="80%" Maxw="500px" margin="auto">
             <Text size="30px" Fw="600" center margin="50px 0">
               로그인
