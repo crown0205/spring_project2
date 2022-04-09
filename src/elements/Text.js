@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const Text = props => {
-  const { children, margin, padding, Fw, size, bold, center } = props;
+  const { children, margin, padding, Fw, size, bold, center, color } = props;
 
   // Fw = font-weight
-  
+
   const styles = {
     size,
     margin,
@@ -13,6 +13,7 @@ const Text = props => {
     Fw,
     bold,
     center,
+    color,
   };
 
   return (

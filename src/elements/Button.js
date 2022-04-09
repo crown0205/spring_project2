@@ -2,7 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = props => {
-  const { _onClick, children, text, margin, padding, bg, color, width, br} = props;
+  const {
+    _onClick,
+    children,
+    text,
+    margin,
+    padding,
+    bg,
+    color,
+    width,
+    br,
+    height,
+  } = props;
+
 
   // bg = background, br = border-radius,
   const styles = {
@@ -12,6 +24,7 @@ const Button = props => {
     br,
     color,
     width,
+    height
   };
   return (
     <React.Fragment>
@@ -35,6 +48,7 @@ const ButtonBox = styled.button`
   margin: ${props => props.margin};
   padding: ${props => props.padding};
   width: ${props => props.width};
+  width: ${props => props.height};
   color: ${props => props.color};
   background-color: ${props => props.bg};
   border-radius: ${props => props.br};
