@@ -26,6 +26,13 @@ const Main = () => {
             return <Post key={id} {...p} />;
           })} */}
           <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
         </PostList>
       </MainWrap>
     </React.Fragment>

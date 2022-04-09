@@ -26,12 +26,13 @@ Image.defaultProps = {
 };
 
 const RectangleOutter = styled.div`
-  width: 100%;
+  width: 50%;
   min-width: 250px;
+  min-height: 250px;
 `;
 const RectangleInner = styled.div`
   position: relative;
-  padding-top: 75%;
+  padding-top: 50%;
   overflow: hidden;
   background-image: url("${(props) => props.src}");
   background-size: cover;
