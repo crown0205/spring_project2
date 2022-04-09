@@ -12,7 +12,6 @@ import PostDetail from "../pages/PostDetail";
 import Footer from "../components/Footer";
 
 function App() {
-
   return (
     <React.Fragment>
       <BrowserRouter>

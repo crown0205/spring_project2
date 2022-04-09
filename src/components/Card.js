@@ -6,18 +6,12 @@ import Image from "../elements/Image";
 const Card = (props) => {
   return (
     <React.Fragment>
-      {/* <Grid>
-        <Grid is_flex>
-          <Image shape="circle" src={props.src} />
-        </Grid>
+      <Grid>
         <Grid padding="16px"></Grid>
         <Grid>
           <Image shape="rectangle" src={props.src} />
         </Grid>
-        <Grid padding="16px"></Grid>
-      </Grid> */}
-      <Grid>
-        <Image shape="rectangle"></Image>
+        <Grid padding="16px">글 제목 작성해주세요</Grid>
       </Grid>
     </React.Fragment>
   );
