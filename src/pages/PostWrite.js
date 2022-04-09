@@ -8,7 +8,7 @@ import {Grid, Text, Input, Button,Image} from "../elements/index";
 const PostWrite = ()=>{
     return(
         <React.Fragment>
-            <Grid bg="#ddd">
+            <Grid bg="#ddd" Minh="75vh">
                 <Grid margin="auto" width="40%" bg="#fff">
                     <Grid padding="20px" center>
                         <Text margin="20px" size="25px" Fw="600">게시글 작성</Text>

@@ -10,11 +10,13 @@ import Signup from "../pages/Signup";
 import PostWrite from "../pages/PostWrite";
 import PostDetail from "../pages/PostDetail";
 import Footer from "../components/Footer";
+import { Grid } from "../elements";
 
 function App() {
   return (
     <React.Fragment>
       <BrowserRouter>
+        <Grid >
         <Header />
         <Route path="/" exact component={Main} />
         <Route path="/login" exact component={Login} />
@@ -22,6 +24,7 @@ function App() {
         <Route path="/write" exact component={PostWrite} />
         <Route path="/detail" exact component={PostDetail} />
         <Footer />
+        </Grid>
       </BrowserRouter>
     </React.Fragment>
   );

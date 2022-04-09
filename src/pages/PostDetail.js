@@ -4,8 +4,8 @@ import { Grid, Button, Text, Input, Image } from "../elements/index";
 const PostDetail = props => {
   return (
     <React.Fragment>
-      <Grid bg="#ddd">
-        <Grid margin="auto" width="40%" bg="#fff" padding="50px 16px">
+      <Grid bg="#ddd" Minh="75vh">
+        <Grid margin="auto" width="40%" bg="#fff" padding="50px 16px" Minh="75vh">
           <Text Fw="600" size="34px" margin="0 0 5px 0">
             이것은 테스트 하는 곳입니다.
           </Text>
