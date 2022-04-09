@@ -71,7 +71,7 @@ const Header = (props) => {
                 width="90px"
                 margin="0px 4px 0px 0px"
                 _onClick={() => {
-                  history.push("/write");
+                  history.push("/posts");
                 }}
               ></Button>
               <Button
