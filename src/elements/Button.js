@@ -38,6 +38,7 @@ const ButtonBox = styled.button`
   color: ${props => props.color};
   background-color: ${props => props.bg};
   border-radius: ${props => props.br};
+  border:none;
 `;
 
 export default Button;
