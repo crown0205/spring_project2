@@ -1,31 +1,38 @@
 import React from "react";
 import styled from "styled-components";
 
-import {Text,Grid} from "./index"
+import { Text, Grid } from "./index";
 
-const Input = props => {
-  const { label, type, value, placeholder, _onChange, onSubmit, is_submit, multiLine} =
-    props;
+const Input = (props) => {
+  const {
+    label,
+    type,
+    value,
+    placeholder,
+    _onChange,
+    onSubmit,
+    is_submit,
+    multiLine,
+  } = props;
 
-
-    if(multiLine){
-      return (
-        <Grid>
-            {/* {label ? "":<Text margin="0px">{label}</Text>} 로 써도됨*/}
-          {label && <Text margin="0px">{label}</Text>}
-          <TextareaBox
-            rows={10}
-            placeholder={placeholder}
-            onChange={_onChange}
-          ></TextareaBox>
-        </Grid>
-      );
-    }
+  if (multiLine) {
+    return (
+      <Grid>
+        {/* {label ? "":<Text margin="0px">{label}</Text>} 로 써도됨*/}
+        {label && <Text margin="0px">{label}</Text>}
+        <TextareaBox
+          rows={10}
+          placeholder={placeholder}
+          onChange={_onChange}
+        ></TextareaBox>
+      </Grid>
+    );
+  }
 
   return (
     <React.Fragment>
       <div>
-        <Text>{label? label:"텍스트"}</Text>
+        {label && <Text>{label}</Text>}
         <InputBox type={type} placeholder={placeholder} onChange={_onChange} />
       </div>
     </React.Fragment>
@@ -33,7 +40,7 @@ const Input = props => {
 };
 
 Input.defaultProps = {
-  multiLine : false,
+  multiLine: false,
   type: "text",
   value: "",
   label: false,
