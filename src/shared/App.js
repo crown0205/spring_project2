@@ -5,6 +5,7 @@ import React from "react";
 
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import Main from "../pages/Main";
 
 import PostWrite from "../pages/PostWrite";
 // import PostList from "../pages/PostList";
@@ -18,7 +19,7 @@ function App() {
       <Header />
       <BrowserRouter>
         {/* <Route path="/" exact component={PostList} /> */}
-        <Route path="/" exact/>
+        <Route path="/" exact component={Main} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/posts" exact component={PostWrite} />

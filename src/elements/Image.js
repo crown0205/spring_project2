@@ -6,19 +6,18 @@ const Image = (props) => {
     src: src,
     size: size,
   };
-        // if(shape === "circle"){
-        //     return (
-        //     <CircleImage {...styles}></CircleImage>
-        // )
-        // }
-        if(shape === "ractangle"){
-            return(
-            <RectangleOutter>
-                <RectangleInner {...styles} ></RectangleInner>
-            </RectangleOutter>
-        )
-    }
-}
+
+  if (shape === "circle") {
+    return <CircleImage {...styles}></CircleImage>;
+  }
+  if (shape === "rectangle") {
+    return (
+      <RectangleOutter>
+        <RectangleInner {...styles}></RectangleInner>
+      </RectangleOutter>
+    );
+  }
+};
 
 Image.defaultProps = {
   shape: "circle", //기본 모양 circle
