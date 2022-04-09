@@ -11,12 +11,18 @@ const PostWrite = ()=>{
             <Grid bg="#ddd">
                 <Grid margin="auto" width="40%" bg="#fff">
                     <Grid padding="20px" center>
-                        <Text margin="20px" size="25px" Fw="600">게시글 작성</Text>
-                        <Input placeholder="제목을 입력해주세요."/>
+                        <Text margin="20px 0 25px 0" size="25px" Fw="600">게시글 작성</Text>
+
+                        {/* 제목 */}
+                        <Grid margin="0 0 16px 0">
+                            <Input placeholder="제목을 입력해주세요."/>
+                        </Grid>
+                        {/* Upload.js */}
                         <Upload/>
+
                     </Grid>
                     {/* 이미지 미리보기 */}
-                    <Grid padding="0px 0px 30px 0px">
+                    <Grid padding="0px 16px 30px 16px">
                         <Image shape="ractangle" src="https://s3.ap-northeast-2.amazonaws.com/yk0825.shop/imageupload.jpg"></Image>
                     </Grid>
                     <Grid padding="16px">
