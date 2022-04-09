@@ -5,20 +5,21 @@ import styled from "styled-components";
 
 const Grid = (props) => {
   const {
-    is_flex,
     children,
+    is_flex,
     width,
     margin,
     padding,
     bg,
     center,
-    _onClick,
     height,
     Minw,
     Maxw,
+    _onClick,
   } = props;
 
   const styles = {
+    is_flex,
     width,
     margin,
     padding,
@@ -27,7 +28,6 @@ const Grid = (props) => {
     height,
     Minw,
     Maxw,
-    is_flex,
   };
 
   return (

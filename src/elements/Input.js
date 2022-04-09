@@ -42,7 +42,7 @@ const Input = props => {
     <React.Fragment>
       <div>
         <Text>{label? label:"텍스트"}</Text>
-        <InputBox type={type} placeholder={placeholder} onChange={_onChange} />
+        <InputBox {...styles} type={type} placeholder={placeholder} onChange={_onChange} />
       </div>
     </React.Fragment>
   );
