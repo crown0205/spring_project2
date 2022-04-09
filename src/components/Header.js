@@ -46,7 +46,7 @@ const Header = (props) => {
 
   return (
     <React.Fragment>
-      <Grid bg="#ddd">
+      <Grid bg="#ffe0e0" is_flex fixed height="0px">
         <Grid is_flex padding="3px 16px" width="40%" margin="auto" bg="#ffe0e0">
           <Grid>
             <Text margin="15px" size="25px" bold>
