@@ -15,6 +15,7 @@ const Grid = props => {
     height,
     Minw,
     Maxw,
+    Minh,
     is_flex,
     fixed,
   } = props;
@@ -31,6 +32,7 @@ const Grid = props => {
     Maxw,
     is_flex,
     fixed,
+    Minh
   };
 
   return (
@@ -59,6 +61,7 @@ const GridBox = styled.div`
   height: ${props => props.height};
   box-sizing: border-box;
   min-width: ${props => props.Minw};
+  min-height: ${props => props.Minh};
   max-width: ${props => props.Maxw};
   ${props => (props.padding ? `padding: ${props.padding};` : "")}
   ${props => (props.margin ? `margin: ${props.margin};` : "")}
