@@ -7,11 +7,11 @@ const Image = (props)=>{
             src:src,
             size:size,}
 
-        if(shape === "circle"){
-            return (
-            <CircleImage {...styles}></CircleImage>
-        )
-        }
+        // if(shape === "circle"){
+        //     return (
+        //     <CircleImage {...styles}></CircleImage>
+        // )
+        // }
         if(shape === "ractangle"){
             return(
             <RectangleOutter>
