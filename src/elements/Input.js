@@ -39,15 +39,13 @@ const Input = (props) => {
 
   return (
     <React.Fragment>
-      <div>
-        <Font>{label && <Text>{label}</Text>}</Font>
-        <InputBox
-          type={type}
-          placeholder={placeholder}
-          onChange={_onChange}
-          {...styles}
-        />
-      </div>
+      <Font>{label && <Text>{label}</Text>}</Font>
+      <InputBox
+        type={type}
+        placeholder={placeholder}
+        onChange={_onChange}
+        {...styles}
+      />
     </React.Fragment>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Text = props => {
+const Text = (props) => {
   const { children, margin, padding, Fw, size, bold, center, color } = props;
 
   // Fw = font-weight
@@ -33,14 +33,14 @@ Text.defaultProps = {
 };
 
 const P = styled.p`
-  color: ${props => props.color};
-  font-size: ${props => props.size};
-  font-weight: ${props => props.Fw};
-  /* font-weight: ${props => (props.bold ? "600" : "400")}; */
-  text-align: ${props => (props.center ? "center" : "")};
-  margin: ${props => props.margin};
-  padding: ${props => props.padding};
-  font-size: ${props => props.size};
+  color: ${(props) => props.color};
+  font-size: ${(props) => props.size};
+  font-weight: ${(props) => props.Fw};
+  /* font-weight: ${(props) => (props.bold ? "600" : "400")}; */
+  text-align: ${(props) => (props.center ? "center" : "")};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
+  font-size: ${(props) => props.size};
 `;
 
 export default Text;
