@@ -13,11 +13,10 @@ const PostWrite = ()=>{
                     <Grid padding="20px" center>
                         <Text margin="20px" size="25px" Fw="600">게시글 작성</Text>
                         <Input placeholder="제목을 입력해주세요."/>
-                        <Upload/>
                     </Grid>
                     {/* 이미지 미리보기 */}
                     <Grid padding="0px 0px 30px 0px">
-                        <Image shape="ractangle" src="https://s3.ap-northeast-2.amazonaws.com/yk0825.shop/imageupload.jpg"></Image>
+                        <Image shape="rectangle" src="https://s3.ap-northeast-2.amazonaws.com/yk0825.shop/imageupload.jpg"></Image>
                     </Grid>
                     <Grid padding="16px">
                         <Input label="" placeholder="내용을 입력해 주세요." multiLine></Input>

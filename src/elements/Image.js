@@ -7,9 +7,6 @@ const Image = props => {
     size,
   };
 
-  if (shape === "circle") {
-    return <CircleImage {...styles}></CircleImage>;
-  }
   if (shape === "rectangle") {
     return (
       <RectangleOutter>
@@ -20,19 +17,20 @@ const Image = props => {
 };
 
 Image.defaultProps = {
-  shape: "circle", //기본 모양 circle
+  shape: "Rectangle", //기본 모양 circle
   src: "https://s3.ap-northeast-2.amazonaws.com/yk0825.shop/0325.jpg",
   size: 36,
+  width:"100%"
 };
 
 const RectangleOutter = styled.div`
-  width: 50%;
+  width: 100%;
   min-width: 250px;
   min-height: 250px;
 `;
 const RectangleInner = styled.div`
   position: relative;
-  padding-top: 50%;
+  padding-top: 75%;
   overflow: hidden;
 
   background-image: url("${props => props.src}");

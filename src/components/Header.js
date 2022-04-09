@@ -5,15 +5,17 @@ import { Grid, Text, Button } from "../elements";
 const Header = (props) => {
   return (
     <React.Fragment>
-      <Grid is_flex padding="3px 16px">
-        <Grid>
-          <Text margin="0px" size="25px" bold>
-            올봄엔
-          </Text>
-        </Grid>
-        <Grid width="auto" is_flex>
-          <Button text="로그인" width="80px"></Button>
-          <Button text="회원가입" width="80px"></Button>
+      <Grid bg="#ddd">
+        <Grid is_flex padding="3px 16px" width="40%" margin="auto" bg="#ffe0e0">
+          <Grid>
+            <Text margin="0px" size="25px" bold>
+              올봄엔
+            </Text>
+          </Grid>
+          <Grid width="auto" is_flex>
+            <Button text="로그인" width="80px"></Button>
+            <Button text="회원가입" width="80px"></Button>
+          </Grid>
         </Grid>
       </Grid>
     </React.Fragment>
