@@ -54,7 +54,7 @@ const DIV = styled.div`
   margin: auto;
   border: 1px solid #eee;
   border-radius: 8px;
-  min-width: 300px;
+  min-width: 150px;
   height: 550px;
   position: relative;
   box-sizing: border-box;

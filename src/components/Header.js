@@ -8,7 +8,7 @@ const Header = (props) => {
 
   // return (
   //   <React.Fragment>
-  //     <Grid bg="#ddd">
+  //     <Grid bg="#ddd" fixed>
   //       <Grid is_flex padding="3px 16px" width="40%" margin="auto" bg="#ffe0e0">
   //         <Grid>
   //           <Text margin="0px" size="25px" bold>
@@ -49,7 +49,7 @@ const Header = (props) => {
       <Grid bg="#ddd">
         <Grid is_flex padding="3px 16px" width="40%" margin="auto" bg="#ffe0e0">
           <Grid>
-            <Text margin="0px" size="25px" bold>
+            <Text margin="15px" size="25px" bold>
               <span
                 onClick={() => {
                   console.log("home");

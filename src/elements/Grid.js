@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // Mw = min-width,
 
-const Grid = props => {
+const Grid = (props) => {
   const {
     children,
     width,
@@ -32,7 +32,7 @@ const Grid = props => {
     Maxw,
     is_flex,
     fixed,
-    Minh
+    Minh,
   };
 
   return (
@@ -57,19 +57,19 @@ Grid.defaultProps = {
 };
 
 const GridBox = styled.div`
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   box-sizing: border-box;
-  min-width: ${props => props.Minw};
-  min-height: ${props => props.Minh};
-  max-width: ${props => props.Maxw};
-  ${props => (props.padding ? `padding: ${props.padding};` : "")}
-  ${props => (props.margin ? `margin: ${props.margin};` : "")}
-  ${props => (props.bg ? `background-color: ${props.bg};` : "")}
-  ${props =>
+  min-width: ${(props) => props.Minw};
+  min-height: ${(props) => props.Minh};
+  max-width: ${(props) => props.Maxw};
+  ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+  ${(props) => (props.bg ? `background-color: ${props.bg};` : "")}
+  ${(props) =>
     props.fixed ? `height:100px; position:fixed; top:0; z-index:1;` : ""};
-  ${props => (props.center ? `text-align: center;` : "")};
-  ${props =>
+  ${(props) => (props.center ? `text-align: center;` : "")};
+  ${(props) =>
     props.is_flex
       ? `display:flex; align-items:center; justify-content : space-between;`
       : ""};
