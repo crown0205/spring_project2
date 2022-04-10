@@ -41,6 +41,7 @@ const Input = (props) => {
     <React.Fragment>
       <Font>{label && <Text>{label}</Text>}</Font>
       <InputBox
+        value={value}
         type={type}
         placeholder={placeholder}
         onChange={_onChange}
