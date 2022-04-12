@@ -11,7 +11,7 @@ const Input = (props) => {
     placeholder,
     _onChange,
     onSubmit,
-    is_submit,
+    is_onSubmit,
     multiLine,
     width,
     left,
@@ -40,13 +40,17 @@ const Input = (props) => {
   return (
     <React.Fragment>
       <Font>{label && <Text>{label}</Text>}</Font>
+      {is_onSubmit?(
       <InputBox
         value={value}
         type={type}
         placeholder={placeholder}
         onChange={_onChange}
-        {...styles}
-      />
+        onKeyPress={(e)=>{
+          if(e.key === "Enter"){
+            onSubmit(e);}}}
+        {...styles}/>)
+        :(<InputBox type={type} placeholder={placeholder} onChange={_onChange}/>)}
     </React.Fragment>
   );
 };
@@ -58,7 +62,7 @@ Input.defaultProps = {
   width: "100%",
   label: false,
   placeholder: "텍스트를 입력해주세요.",
-  is_submit: false,
+  is_onSubmit: false,
   _onChange: () => {},
   onsubmit: () => {},
 };
