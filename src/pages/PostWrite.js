@@ -3,7 +3,7 @@ import React from "react";
 import Upload from "../shared/Upload";
 import { useSelector, useDispatch } from "react-redux";
 import {Grid, Text, Input, Button,Image} from "../elements/index";
-import axios from "axios";
+// import { actionCreators as imageActions } from "../redux/modules/image";
 import { actionCreators as postActions } from "../redux/modules/post";
 
 const PostWrite = (props)=>{
@@ -13,7 +13,10 @@ const PostWrite = (props)=>{
     const [title_box,setTitleBox] = React.useState(); //제목
     const [content_box,setContentBox] = React.useState(); //글 내용
     
-    const {history} = props;
+    const preview = useSelector((state)=>state.image);
+    console.log(preview)
+    // const {history} = props;
+
      //제목의 input값을 바꿔줄 친구
     const titleChange = (e)=>{//event
         setTitleBox(e.target.value);
@@ -22,7 +25,7 @@ const PostWrite = (props)=>{
     const conChange = (e)=>{//event
         setContentBox(e.target.value);
     }
-    //제목을 입력하지 않았을경우
+    //제목이나 내용을 입력하지 않았을경우
     const titlepost = ()=>{
         console.log(title_box);
         console.log(content_box);
@@ -59,8 +62,7 @@ const PostWrite = (props)=>{
                     </Grid> 
                     {/* 이미지 미리보기 */}
                     <Grid padding="0px 20px 30px 20px">
-                       
-                        <Image shape="rectangle" src="https://s3.ap-northeast-2.amazonaws.com/yk0825.shop/imageupload.jpg"></Image>
+                        <Image shape="rectangle" src={"https://s3.ap-northeast-2.amazonaws.com/yk0825.shop/imageupload.jpg"}></Image>
                     </Grid>
                     <Grid padding="16px">
                         <Input label="" placeholder="내용을 입력해 주세요." multiLine

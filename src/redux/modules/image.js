@@ -11,13 +11,21 @@ const uploading = createAction(UPLOADING, (uploading) => ({ uploading }));
 const uploadImage = createAction(UPLOAD_IMAGE, (image_url) => ({ image_url }));
 const setPreview = createAction(SET_PREVIEW, (preview) => ({ preview })); //미리보기 이미지
 
+// initial state
+// 초기값
+const initialState = {
+    image_url: "",
+    uploading: false,
+    preview:null,
+  }
+
 //이미지 업로드
 function uploadImageFB(image) {
     return function (dispatch, getState, {history}) {
       
       dispatch(uploading(true));
       
-    //   console.log(`images/${new Date().getTime()}_${image.name}`);
+      console.log(`images/${new Date().getTime()}_${image.name}`);
     //   const _upload = storage.ref(`images/${image.name}`).put(image);
   
     //   //   업로드!
@@ -35,13 +43,6 @@ function uploadImageFB(image) {
     };
   }
 
-// initial state
-// 초기값
-const initialState = {
-    image_url: "",
-    uploading: false,
-    preview:null,
-  }
 
 // reducer
 export default handleActions(
