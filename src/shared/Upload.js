@@ -20,9 +20,9 @@ const Upload = (props) => {
   const uploadFB = () => {
     axios({
       method:"get",
-      url:"https://6253d1d889f28cf72b5335ef.mockapi.io/comments",
+      url:"https://6253d1d889f28cf72b5335ef.mockapi.io/images",
     }).then((docs)=>{
-      console.log(docs)
+      console.log(docs.data)
       //3번 dispatch로 액션함수한테 던짐
       // dispatch(loading(docs))
     })

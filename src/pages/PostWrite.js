@@ -3,11 +3,12 @@ import React from "react";
 import Upload from "../shared/Upload";
 import { useSelector, useDispatch } from "react-redux";
 import {Grid, Text, Input, Button,Image} from "../elements/index";
-
+import axios from "axios";
+import { actionCreators as postActions } from "../redux/modules/post";
 
 const PostWrite = (props)=>{
     const dispatch = useDispatch();
-    const is_login = useSelector((state)=>state.user.is_login);
+    // const is_login = useSelector((state)=>state.user.is_login);
     //제목과 내용을 저장할 공간이 필요해
     const [title_box,setTitleBox] = React.useState(); //제목
     const [content_box,setContentBox] = React.useState(); //글 내용
@@ -32,16 +33,17 @@ const PostWrite = (props)=>{
             window.alert("내용을 입력해주세요.")
             return;
         }
+        dispatch(postActions.addPostDB(content_box));
     }
 
-    if(!is_login){
-        return(
-            <Grid>
-                <Text>로그인 후에만 글 작성이 가능합니다</Text>
-                <Button _onClick={()=>{history.replace("/login")}}>로그인 하러가기</Button>
-            </Grid>
-        )
-    }
+    // if(!is_login){
+    //     return(
+    //         <Grid>
+    //             <Text>로그인 후에만 글 작성이 가능합니다</Text>
+    //             <Button _onClick={()=>{history.replace("/login")}}>로그인 하러가기</Button>
+    //         </Grid>
+    //     )
+    // }
     return(
         <React.Fragment>
             <Grid Minh="75vh">

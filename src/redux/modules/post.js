@@ -4,7 +4,6 @@ import moment from "moment";
 import "moment";
 // import { api_token, api, test_api, test, test_api2, api_token2 } from "../../shared/api";
 import axios from "axios";
-
 const SET_POST="SET_POST";
 const ADD_POST="ADD_POST";
 // const EDIT_POST = "EDIT_POST";
@@ -30,21 +29,33 @@ const initialPost={
     
 };
 //DB에 게시글 정보 저장하기
-const addPostDB = () =>{
+const addPostDB = (contents="") =>{
     return function (dispatch,getState,{history}){
         
       axios({
         method:"get",
         url:"https://6253d1d889f28cf72b5335ef.mockapi.io/images",
+        data:""
       }).then((docs)=>{
-            //게시글에 이미지 업로드를 위해 파이어베이스에서 preview를 가져와야함
+            
+
             console.log(docs);
-            // const _user = getState().user.user; //getState() : 스토어에 있는 정보에 접근을 할수있도록 함
-            // const user_info={
-            //     user_name: _user.user_name,
-            //     user_id:_user.uid,
-            //     user_profile: _user.user_profile,
-            // }
+            const _user = getState().user.user;
+            const _user_info = {
+                user_name:_user.user_name,
+                user_id:_user.id,
+                
+            }
+            const _post = {
+                ...initialPost,
+                contents:contents,
+                createAt:moment().format("YYYY-MM-DD hh:mm:ss"),//addpost불려오고나면 만들거야
+            }
+            console.log(_post);
+
+            axios.url.add({..._user_info,..._post}).then((doc)=>{
+                console.log(doc);
+            })
       })
     }
 }
