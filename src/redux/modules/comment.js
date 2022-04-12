@@ -1,181 +1,151 @@
-// import {createAction, handleActions} from "redux-actions";
-// import {produce} from "immer";
-// import "moment";
-// import moment from "moment";
-// import {api, api_token, test} from "../../shared/api";
+import { createAction, handleActions } from "redux-actions";
+import { produce } from "immer";
+import "moment";
+import moment from "moment";
+import { actionCreators as postActions } from "./post";
+import axios from "axios";
 
-// const GET_COMMENT = "GET_COMMENT";
-// const ADD_COMMENT = "ADD_COMMENT";
-// const DELETE_COMMENT = "DELETE_COMMENT";
+//mock API
 
-// const LOADING = "LOADING";
 
-// const getComment = createAction(GET_COMMENT, (post_id, comment_list) => ({post_id, comment_list}));
-// const addComment = createAction(ADD_COMMENT, (post_id, comment) => ({post_id, comment}));
+const SET_COMMENT = "SET_COMMENT";
+const ADD_COMMENT = "ADD_COMMENT";
 
-// const loading = createAction(LOADING, (is_loading) => ({is_loading}));
+//5번
+//액션타입에서 리듀서로 던짐
 
-// const initialState = {
-//     list: {},
-//     is_loading: false,
-// }
+const LOADING = "LOADING";
 
-// const getCommentFB = (post_id = null) => {
-//     return async function(dispatch, getState, {history}){
+const setComment = createAction(SET_COMMENT, (post_id,comments) => ({
+  post_id,
+  comments,
+}));
+const addComment = createAction(ADD_COMMENT, (commentWrap) => ({
+  commentWrap,
+}));
 
-//         console.log('댓글 조회 post_id !! ',post_id);
+//4번
+//액션함수에서 액션타입으로 던짐
 
-//         if(!post_id) {
-//             return;
-//         }
+const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
 
-//         await api_token.get(`/post/${post_id}/comments`,{
-//             headers: {
-//               authorization: `Bearer ${localStorage.getItem("is_login")}`,
-//             }
-//           })
-//         .then((res) => {
+const initialState={
+  list:[
+    {post_id:"pos1",comment_id:"com1",user_name:"리액트",comment: "너무 멋진 사진이군요"}
+    ,{post_id:"pos1",comment_id:"com1",user_name:"노드",comment: "와 정말 예쁘네요^^"}],
+    is_loading: true,
+}
 
-//             // console.log('댓글 리스트 res !! ', res.data.commentsParents);
 
-//             const commentList = res.data.commentsParents.reduce((acc, cur, i) => {
+//2번
+//postDetail에서 dispatch 받아서 미들웨어
+//db에 데이터 던져주고 다시 db에서 데이터 받아서 dispatch로 리듀서에 던짐
+//
 
-//                 acc.push({
-//                     commentId: cur.id,
-//                     userId: cur.userId,
-//                     commentBody: cur.commentBody,
-//                     createdAt: cur.createdAt,
-//                     parentsId: cur.parentsId,
-//                     updatedAt: cur.updatedAt,
-//                     nickname: cur.user !== null ? cur.user.nickname : "닉네임없음",
-//                 });
+const loadingCommentDB = () =>{
+  return function (dispatch,getState,{history}){
+    axios({
+      method:"get",
+      url:"https://6253d1d889f28cf72b5335ef.mockapi.io/comments",
+    }).then((docs)=>{
+      //3번 dispatch로 액션함수한테 던짐
+      dispatch(loading(docs))
 
-//                 return acc;
-//             }, []);
+      // console.log(docs.data);
+      // let list=[];
+      // console.log(docs.data.length);
 
-//             dispatch(getComment(post_id, commentList))
+      // docs.forEach((doc)=>{
+      //   console.log(doc)
+      //   list.push({...doc.data})
+      // })
+      // console.log(list);
 
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         });
+      // const test1 = doc.data[0].comment
+      // const test2 = doc.data[0].user_name
+      // console.log(test1)
+      // console.log(test2)
 
-//     }
-// }
+    })
+  }
+}
 
-// const addCommentFB = (post_id, contents) => {
-//     return async function(dispatch, getState, {history}){
-//         await api_token.post(`/post/${post_id}/comment/${0}`,
-//             {
-//                 commentBody: contents,
-//                 userId: localStorage.getItem('userId'),
-//             },
-//             {
-//                 headers: {
-//                   authorization: `Bearer ${localStorage.getItem("is_login")}`,
-//                 }
-//               }
-//         ).then((res) => {
-//             const preList = getState().comment.list[post_id];
-//             console.log('addCommentFb !! ', res.data.comment);
+const setCommentFB = (user_name) => {
+  return function (dispatch, getState, { history }) {
+    if (!user_name) {
+      return;
+    }
+    dispatch(setComment(user_name));
+  console.log(user_name);
+  }
 
-//             const newComment = {
-//                 commentId: res.data.comment.id,
-//                 userId: res.data.comment.userId,
-//                 commentBody: res.data.comment.commentBody,
-//                 createdAt: res.data.comment.createdAt,
-//                 parentsId: res.data.comment.parentsId,
-//                 updatedAt: res.data.comment.updatedAt,
-//                 nickname: localStorage.getItem('nickname'),
-//             };
+}
+//댓글 입력하기
+const addCommentFB = (post_id=null) => {
 
-//             const addList = [...preList, newComment];
+  return function (dispatch, getState, { history }) {
+  //   const post={
+  //     post_id:post_id,comment_id:"com1",user_name:"익명",comment:commentWrap
+  //   }
+  //   dispatch(addComment(post));
+  // }
+  axios({
+    method:"get",
+    url:"https://6253d1d889f28cf72b5335ef.mockapi.io/comments",
+  }).then((docs)=>{
+    let list=[];
+    docs.forEach((doc)=>{
+      list.push({...doc.data(), id:doc.id});
+    })
+    dispatch(setComment(post_id,list));
+  }).catch(err=>{
+    console.log("댓글 정보를 가져올 수가 없네요!")
+  })
+  }
+}
 
-//             dispatch(getComment(post_id, addList))
+//리듀서
+export default handleActions(
+  {
+    [SET_COMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list.push(...action.payload.comments);
+        console.log(...action.payload.comments)
+        draft.list = draft.list.reduce((acc, cur) => {
 
-//         }).catch((err) => {
-//             console.log(err);
-//         })
+          if (acc.findIndex((a) => a.commentId === cur.commentId) === -1) {
+            return [...acc, cur];
+          } else {
+            acc[acc.findIndex((a) => a.commentId === cur.commentId)] = cur;
+            return acc;
+          }
+        }, []);
+      }),
 
-//     }
-// }
+    [ADD_COMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list.unshift(action.payload.commentWrap);
+      }),
 
-// const updateCommentFB = (postId, commentId, contents) => {
-//     return async function(dispatch, getState, {history}) {
-//         await api_token.patch(`/post/${postId}/comment/${commentId}`,
-//             {
-//                 commentBody: contents,
-//             },
-//             {
-//                 headers: {
-//                   authorization: `Bearer ${localStorage.getItem("is_login")}`,
-//                 }
-//               }
-//         ).then((res) => {
+    //6번
+    //서버에서 받은 데이터 리덕스에 저장
+    //필요한 데이터 정제해서 리덕스에 저장
+    //commentList.js로 이동
+    [LOADING]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(state,action)
+        draft.is_loading = action.payload.is_loading;
+        draft.list = action.payload.data;
+      }),
+  },
+  initialState);
 
-//             const preList = getState().comment.list[postId];
-//             const upDateList = preList.reduce((arr, cur, i) => {
-//                 if(cur.commentId === commentId){
-//                     arr.push({...cur, commentBody: contents});
-//                 }else {
-//                     arr.push(cur);
-//                 }
+const actionCreators = {
+  setCommentFB,
+  addCommentFB,
+  setComment,
+  addComment,
+  loadingCommentDB
+};
 
-//                 return arr;
-//             }, []);
-//             dispatch(getComment(postId, upDateList));
-
-//         }).catch((err) => {
-//             console.log(err);
-//         })
-
-//     }
-// }
-
-// const removeCommentFB = (postId, commentId) => {
-//     return async function(dispatch, getState, {history}) {
-//         await api_token.patch(`/post/${postId}/comment/${commentId}/disabled`,
-//         {
-//             headers: {
-//               authorization: `Bearer ${localStorage.getItem("is_login")}`,
-//             }
-//           }
-//         ).then((res) => {
-//             const preList = getState().comment.list[postId];
-//             const deleteList = preList.filter((item) => item.commentId !== commentId);
-//             console.log('removeCommentFB !! ', res);
-
-//             dispatch(getComment(postId, deleteList));
-
-//         }).catch((err) => {
-//             console.log(err);
-//         })
-//     }
-// }
-
-// export default handleActions(
-//     {
-//         [GET_COMMENT]: (state, action) => produce(state, (draft) => {
-//             draft.list[action.payload.post_id] = action.payload.comment_list;
-//         }),
-//         [ADD_COMMENT]: (state, action) => produce(state, (draft)=> {
-
-//         }),
-//         [LOADING]: (state, action) =>
-//         produce(state, (draft) => {
-//           draft.is_loading = action.payload.is_loading;
-//         })
-//     },
-//     initialState
-//   );
-
-//   const actionCreators = {
-//     getCommentFB,
-//     getComment,
-//     addComment,
-//     addCommentFB,
-//     updateCommentFB,
-//     removeCommentFB,
-//   };
-
-//   export { actionCreators };
+export { actionCreators };
