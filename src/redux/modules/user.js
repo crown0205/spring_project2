@@ -15,7 +15,8 @@ const logOut = createAction(LOG_OUT, user => ({ user }));
 
 //  초기값
 const initialState = {
-  user: "",
+  user_id:"test@test.com",
+  user_name: "minggiject",
   is_login: false,
 };
 
@@ -171,7 +172,7 @@ export default handleActions(
   {
     [LOG_IN]: (state, action) =>
       produce(state, draft => {
-        console.log(action);
+        // console.log(action);
         // draft.user = action.payload.user.user_name;
         draft.is_login = true;
       }),
