@@ -37,18 +37,20 @@ const initialState = {
 
 
 // // 회원가입
-const signUpDB = (id, pwd, user_name, pwdcheck) => {
+const signUpDB = (user_id,  user_name, password, passwordConfirm) => {
   return function (dispatch, getState, { history }) {
-    console.log({id, pwd, user_name, pwdcheck})
+    console.log({user_id, password, user_name, passwordConfirm})
+    console.log("회원가입!!!")
+
     axios({
       method: "post",
-      url: `https://6251cd887f7fa1b1dddf398b.mockapi.io/user`,
+      url: "http://15.164.222.116/user/signup",
       // 회원가입 시 입력 데이터 보내기(보내기만 하면 끝)
       data: {
-        id: id,
+        user_id: user_id,
         user_name: user_name,
-        pwd: pwd,
-        pwdcheck: pwdcheck
+        password: password,
+        passwordConfirm: passwordConfirm
       },
     })
       .then((user) => {
@@ -57,21 +59,21 @@ const signUpDB = (id, pwd, user_name, pwdcheck) => {
       })
       .catch((err) => {
         console.log("회원가입 에러", err);
-        window.alert("이미 중복된 아이디입니다. 확인해주세요");
+        window.alert("좌절.. 절망.. 어둠속으로");
       });
   };
 };
 
 // 로그인
-const LoginDB = (id, pwd) => {
+const LoginDB = (userId, password) => {
   return function (dispatch, getState, { history }) {
-    console.log({id,pwd})
+    console.log({userId,password})
     axios({
       method: "post",
-      url: `https://6251cd887f7fa1b1dddf398b.mockapi.io/user`,
+      url: "http://15.164.222.116/user/login",
       data: {
-        user_id : id,
-        pwd: pwd,
+        userId : userId,
+        password: password,
       },
     })
       .then((res) => {

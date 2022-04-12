@@ -20,7 +20,7 @@ const Signup = props => {
     if (pwd !== pwd_check) {
       return window.alert("비밀번호가 다릅니다~!");
     }
-    console.log({ id, pwd, user_name });
+
     dispatch(userActions.signUpDB(id, user_name, pwd, pwd_check));
   };
 
