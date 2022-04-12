@@ -20,12 +20,14 @@ const initialState = {
   }
 
 //이미지 업로드
+
 function uploadImageFB(image) {
     return function (dispatch, getState, {history}) {
       
       dispatch(uploading(true));
       
       console.log(`images/${new Date().getTime()}_${image.name}`);
+      
     //   const _upload = storage.ref(`images/${image.name}`).put(image);
   
     //   //   업로드!

@@ -5,39 +5,51 @@ import { useSelector, useDispatch } from "react-redux";
 import {Grid, Text, Input, Button,Image} from "../elements/index";
 // import { actionCreators as imageActions } from "../redux/modules/image";
 import { actionCreators as postActions } from "../redux/modules/post";
+import { useHistory } from "react-router-dom";
 
 const PostWrite = (props)=>{
     const dispatch = useDispatch();
+    const history = useHistory();
+    const preview = useSelector((state)=>state.image.preview);
+    const fileInput = React.useRef(null);
     // const is_login = useSelector((state)=>state.user.is_login);
     //제목과 내용을 저장할 공간이 필요해
-    const [title_box,setTitleBox] = React.useState(); //제목
-    const [content_box,setContentBox] = React.useState(); //글 내용
-    
-    const preview = useSelector((state)=>state.image);
-    console.log(preview)
-    // const {history} = props;
 
-     //제목의 input값을 바꿔줄 친구
-    const titleChange = (e)=>{//event
-        setTitleBox(e.target.value);
+    const [post, setPost] = React.useState({
+        title: "",
+        content: "",
+      }); 
+      
+    const handleForm = (e) => {
+        setPost({
+            ...post,
+            [e.target.name]: e.target.value,
+        });
+    };
+  
+    const formData = new FormData();
+
+    if(fileInput.current){
+
+        formData.append('imageUrl', fileInput.current.files[0] )
+        formData.append('title', post.title)
+        formData.append('content', post.content)
+
     }
-    //글 내용의 input값을 바꿔줄 친구
-    const conChange = (e)=>{//event
-        setContentBox(e.target.value);
+    for (var pair of formData.entries()) { 
+        console.log(pair[0] + ", " + pair[1]); 
     }
-    //제목이나 내용을 입력하지 않았을경우
-    const titlepost = ()=>{
-        console.log(title_box);
-        console.log(content_box);
-        if(!title_box){
-            window.alert("제목을 입력해주세요.")
+
+    const postingBox = ()=>{
+        
+        if (post.title === "" || post.content === "" || preview === null) {
+            window.alert("내용을 추가해 주세요.");
             return;
-        }else if(!content_box){
-            window.alert("내용을 입력해주세요.")
-            return;
-        }
-        dispatch(postActions.addPostDB(content_box));
+          }
+        dispatch(postActions.addPostDB(formData));
+
     }
+    
 
     // if(!is_login){
     //     return(
@@ -54,26 +66,29 @@ const PostWrite = (props)=>{
                     <Grid padding="140px 20px 20px 20px" center>
                         <Text margin="20px 0px 40px 0px" size="25px" Fw="600">게시글 작성</Text>
                     </Grid>    
-                    <Grid padding="0px 20px">
-                        <Input _onChange={titleChange} placeholder="제목을 입력해주세요."/>
+                    <Grid padding="0px 20px 20px 20px">
+                        <Input _onChange={handleForm} name="title" placeholder="제목을 입력해주세요." value={post.title}/>
                     </Grid>
                     <Grid padding="0px 20px 20px 20px">
                         <Upload/>
                     </Grid> 
                     {/* 이미지 미리보기 */}
                     <Grid padding="0px 20px 30px 20px">
-                        <Image shape="rectangle" src={"https://s3.ap-northeast-2.amazonaws.com/yk0825.shop/imageupload.jpg"}></Image>
+                        <Image shape="rectangle" 
+                        src={preview ? preview : "https://s3.ap-northeast-2.amazonaws.com/yk0825.shop/imageupload.jpg"}></Image>
                     </Grid>
                     <Grid padding="16px">
                         <Input label="" placeholder="내용을 입력해 주세요." multiLine
-                            _onChange={conChange}
+                            _onChange={handleForm} name="content" value={post.content} 
                         ></Input>
                     </Grid>
                     <Grid padding="16px" is_flex>
-                        <Button padding="10px" width="48%" margin="0 10px 0 0" text="출간하기"
-                            _onClick={titlepost}
+                        <Button padding="20px" width="48%" margin="0 10px 0 0" text="출간하기"
+                            _onClick={postingBox}
                         ></Button>
-                        <Button padding="10px" width="48%" text="취소하기"></Button>
+                        <Button padding="20px" width="48%" text="취소하기" _onClick={()=>{
+                            history.push('/')
+                        }}></Button>
                     </Grid>
                 </Grid>
             </Grid>

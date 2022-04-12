@@ -29,34 +29,25 @@ const initialPost={
     
 };
 //DB에 게시글 정보 저장하기
-const addPostDB = (contents="") =>{
+const addPostDB = (formData) =>{
     return function (dispatch,getState,{history}){
-        
-      axios({
-        method:"get",
-        url:"https://6253d1d889f28cf72b5335ef.mockapi.io/images",
-        data:""
-      }).then((docs)=>{
-            
-
-            console.log(docs);
-            const _user = getState().user.user;
-            const _user_info = {
-                user_name:_user.user_name,
-                user_id:_user.id,
-                
-            }
-            const _post = {
-                ...initialPost,
-                contents:contents,
-                createAt:moment().format("YYYY-MM-DD hh:mm:ss"),//addpost불려오고나면 만들거야
-            }
-            console.log(_post);
-
-            axios.url.add({..._user_info,..._post}).then((doc)=>{
-                console.log(doc);
+        console.log("확인중");
+        console.log(formData);
+        for (var pair of formData.entries()) { console.log(pair[0] + ", " + pair[1]); }
+        axios({
+            method: "post",
+            // url: "http://15.164.222.116/",
+            // 회원가입 시 입력 데이터 보내기(보내기만 하면 끝)
+            data:formData,
+          })
+            .then(res => {
+                console.log(res);
+                history.push("/");
             })
-      })
+            .catch(err => {
+              console.log("저장 실패", err);
+              window.alert("나에게...희망을....줘......");
+            });
     }
 }
 
