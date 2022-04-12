@@ -66,14 +66,14 @@ const signUpDB = (user_id,  user_name, password, passwordConfirm) => {
 };
 
 // 로그인
-const LoginDB = (userId, password) => {
+const LoginDB = (user_id, password) => {
   return function (dispatch, getState, { history }) {
-    console.log({userId,password})
+    console.log({user_id,password})
     axios({
       method: "post",
       url: "http://15.164.222.116/user/login",
       data: {
-        userId : userId,
+        user_id : user_id,
         password: password,
       },
     })
