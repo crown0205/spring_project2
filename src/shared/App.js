@@ -23,8 +23,8 @@ function App() {
 
   const is_session = getCookie("is_login") ? true : false;
 
-  console.log(is_session);
-  console.log(getCookie("is_login"))
+
+  // console.log(getCookie("is_login"))
 
   React.useEffect(() => {
     if (is_session) {
