@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, Button, Text, Input, Image } from "../elements/index";
 
 import CommentWrite from "../components/CommentWrite";
 import CommentList from "../components/CommentList";
-const PostDetail = props => {
+
+import { useDispatch,useSelector } from "react-redux";
+import { actionCreators as postActions} from "../redux/modules/post";
+import { actionCreators as commentActions } from "../redux/modules/comment";
+import axios from "axios";
+
+const PostDetail = (props) => {
+
+
+  const dispatch=useDispatch();
+
+//포스트 정보가 필요하다      
+  const id=props.match.params.id;
+  const comments=useSelector((state) => state.comment.list);
+  console.log(comments);
+
+  const post_list = useSelector(store => store.post.list);
+  const post_idx = post_list.findIndex(p => p.id === id);
+  const post = post_list[post_idx];
+    //새로고침 시 한번만 렌더링
+    //commentloading 시작부분
+  //1번 => comment.js 이동
+  React.useEffect(()=>{
+    dispatch(commentActions.loadingCommentDB())
+    
+    if(!post){
+      return;
+    }
+    dispatch(postActions.getOnePostDB(id));
+  },[]) 
+
   return (
     <React.Fragment>
       <Grid padding="120px 0px">
@@ -29,10 +59,10 @@ const PostDetail = props => {
           </Grid>
           <hr/>
           <Grid margin="16px 0px 0px 0px" padding="10px 0px 0px 0px" bg="#ffeae4">
-            {/* 댓글 작성 */}
-            <CommentWrite/>
+            {/* 댓글 작성란 */}
+            <CommentWrite post_id={id}/>
             {/* 댓글 목록 */}
-            <CommentList/>
+            <CommentList post_id={id}/>
           </Grid>
         </Grid>
 
