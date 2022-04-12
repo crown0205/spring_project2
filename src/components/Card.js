@@ -19,9 +19,13 @@ const Card = (props) => {
           <PostTime>{props.dayBefore}</PostTime>
           <Grid padding="16px"></Grid>
           <Grid>
+            
             <Image shape="rectangle" height="60%" src={props.src} />
+
             <Contents>
+
               <Title>{props.title}</Title>
+
               <PostContent>{props.context}</PostContent>
               <Bottom>
                 <Profile>

@@ -50,7 +50,7 @@ const Input = (props) => {
           if(e.key === "Enter"){
             onSubmit(e);}}}
         {...styles}/>)
-        :(<InputBox type={type} placeholder={placeholder} onChange={_onChange}/>)}
+        :(<InputBox type={type} placeholder={placeholder} onChange={_onChange} {...styles}/>)}
     </React.Fragment>
   );
 };

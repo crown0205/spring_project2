@@ -1,17 +1,39 @@
 import React from "react";
-import { Button, Grid, Input } from "../elements";
+import axios from "axios";
+import {Button} from "../elements/index"
 
 const Upload = (props) => {
-return(
-    <React.Fragment>
-        <Grid is_flex padding="15px 0">
-        <input
-          type="file"
-        />
-        {/* <Button margin="10px 0" backgroundColor="#ff9b64" width="30%" padding="10px">이미지 업로드</Button> */}
-      </Grid>
-    </React.Fragment>
-)
 
-}
+  const fileInput = React.useRef();
+
+  const selectFile = (e) => {
+    // e.target은 input이죠!
+    // input이 가진 files 객체를 살펴봅시다.
+    console.log(e.target.files);
+    // 선택한 파일이 어떻게 저장되어 있나 봅시다.
+    console.log(e.target.files[0]);
+
+    // ref로도 확인해봅시다. :)
+    console.log(fileInput.current.files[0]);
+  };
+
+  const uploadFB = () => {
+    axios({
+      method:"get",
+      url:"https://6253d1d889f28cf72b5335ef.mockapi.io/comments",
+    }).then((docs)=>{
+      console.log(docs)
+      //3번 dispatch로 액션함수한테 던짐
+      // dispatch(loading(docs))
+    })
+  }
+
+  return (
+    <React.Fragment>
+      <input type="file" ref={fileInput} onChange={selectFile} />
+      <Button _onClick={uploadFB}>업로드하기</Button>
+    </React.Fragment>
+  );
+};
+
 export default Upload;

@@ -7,7 +7,6 @@ import axios from "axios";
 
 //mock API
 
-
 const SET_COMMENT = "SET_COMMENT";
 const ADD_COMMENT = "ADD_COMMENT";
 
@@ -81,7 +80,7 @@ const setCommentFB = (user_name) => {
 
 }
 //댓글 입력하기
-const addCommentFB = (post_id=null) => {
+const addCommentDB = (post_id=null) => {
 
   return function (dispatch, getState, { history }) {
   //   const post={
@@ -142,7 +141,7 @@ export default handleActions(
 
 const actionCreators = {
   setCommentFB,
-  addCommentFB,
+  addCommentDB,
   setComment,
   addComment,
   loadingCommentDB
