@@ -17,7 +17,12 @@ const Header = props => {
   const user_name = useSelector(state => state.user.user);
 
 
-  if (is_login) {
+  const is_session = localStorage.getItem("userName") ? true : false;
+                                              // ⬆️ 여기에 저장소에 있는 키값을 넣어야된다.
+
+  console.log(is_login, is_session)
+
+  if (is_login && is_session) {
     return (
       <React.Fragment>
         <Grid bg="#ffe0e0" is_flex fixed height="0px">
