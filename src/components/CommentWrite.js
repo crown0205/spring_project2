@@ -28,8 +28,19 @@ const CommentWrite = (props) =>{
         }
         dispatch(commentActions.addCommentFB("pos1",comment_box));
         console.log();
-        setCommentBox("");//댓글 적은 거 리셋되도록
+        setCommentBox("");//댓글 적은 거 입력하고 나면 리셋되도록
     }
+
+    //우선 가상데이터에서 데이터들을 댓글에 뿌리는것까지는 됨
+    //해결해야할 문제
+    //post_id랑 댓글정보 같이 넘겨주기 => 게시물마다 댓글이 다를테니까 이 부분 생각해봐야함
+    //DB 연결
+
+    //로그인을 안했을 경우 댓글 입력창이 안보이도록 설정
+
+    //post_id , user_id, user_name, comment
+    //본인의 댓글만 삭제 가능하도록 설정
+    //(삭제기능 구현을 하게된다면..ㅎ)
 
     return(
         <React.Fragment>

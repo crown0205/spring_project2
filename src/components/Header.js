@@ -93,6 +93,8 @@ const Header = props => {
             <Grid margin="0px 0px 0px 100px">
               <Button
                 text="로그인"
+                margin="8px"
+                padding="10px"
                 width="90px"
                 _onClick={() => {
                   console.log("됨??");
@@ -101,6 +103,7 @@ const Header = props => {
               ></Button>
               <Button
                 text="회원가입"
+                padding="10px"
                 width="90px"
                 _onClick={() => {
                   history.push("/signup");
