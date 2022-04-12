@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Grid, Text, Button } from "../elements";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCookie } from "../shared/Cookie.js";
+import { deleteCookie, getCookie } from "../shared/Cookie.js";
 import { actionCreators as userActions } from "../redux/modules/user";
 
 
@@ -18,7 +18,7 @@ const Header = props => {
   const user_name = useSelector(state => state.user.user); 
   console.log(user_name)
 
-  const is_session = sessionStorage.getItem("token") ? true : false;
+  const is_session = getCookie("is_login") ? true : false;
   console.log(is_login, is_session)
 
   if (is_login && is_session) {

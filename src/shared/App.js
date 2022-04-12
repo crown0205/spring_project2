@@ -21,7 +21,7 @@ import { getCookie } from "./Cookie";
 function App() {
   const dispatch = useDispatch();
 
-  const is_session = sessionStorage.getItem("token") ? true : false;
+  const is_session = getCookie("is_login") ? true : false;
 
   console.log(is_session);
   console.log(getCookie("is_login"))

@@ -9,14 +9,14 @@ const LOG_OUT = "LOG_OUT"; // 로그아웃
 const GET_USER = "GET_USER"; //회원정보 조회
 
 // 액션 생성함수
-const getUser = createAction(GET_USER, (user) => ({ user }));
-const setUser = createAction(LOG_IN, (user) => ({ user }));
-const logOut = createAction(LOG_OUT, (user) => ({ user }));
+const getUser = createAction(GET_USER, user => ({ user }));
+const setUser = createAction(LOG_IN, user => ({ user }));
+const logOut = createAction(LOG_OUT, user => ({ user }));
 
 //  초기값
 const initialState = {
   user: "",
-  is_login: false, 
+  is_login: false,
 };
 
 // axios.get('').then((Response)=>{
@@ -25,22 +25,21 @@ const initialState = {
 //     console.log(Error);
 // })
 
-    // 요약 )
-    // axios.post("url", {
-    //   data: {
-    //     user_id: id,
-    //     user_name : user_name,
-    //     pwd: pwd,
-    //     user_profile: "",
-    //   }
-    // })
-
+// 요약 )
+// axios.post("url", {
+//   data: {
+//     user_id: id,
+//     user_name : user_name,
+//     pwd: pwd,
+//     user_profile: "",
+//   }
+// })
 
 // // 회원가입
-const signUpDB = (user_id,  user_name, password, passwordConfirm) => {
+const signUpDB = (user_id, user_name, password, passwordConfirm) => {
   return function (dispatch, getState, { history }) {
-    console.log({user_id, password, user_name, passwordConfirm})
-    console.log("회원가입!!!")
+    console.log({ user_id, password, user_name, passwordConfirm });
+    console.log("회원가입!!!");
 
     axios({
       method: "post",
@@ -50,15 +49,15 @@ const signUpDB = (user_id,  user_name, password, passwordConfirm) => {
         user_id: user_id,
         user_name: user_name,
         password: password,
-        passwordConfirm: passwordConfirm
+        passwordConfirm: passwordConfirm,
       },
     })
-      .then((user) => {
-        console.log(user)
+      .then(user => {
+        console.log(user);
         window.alert("회원가입을 축하드립니다!");
         history.push("/login");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log("회원가입 에러", err);
         window.alert("좌절.. 절망.. 어둠속으로");
       });
@@ -68,17 +67,16 @@ const signUpDB = (user_id,  user_name, password, passwordConfirm) => {
 // 로그인
 const LoginDB = (user_id, password) => {
   return function (dispatch, getState, { history }) {
-    console.log({user_id,password})
+    console.log({ user_id, password });
     axios({
       method: "post",
       url: "http://15.164.222.116/user/login",
       data: {
-        user_id : user_id,
+        user_id: user_id,
         password: password,
       },
     })
-      .then((res) => {
-
+      .then(res => {
         // // 서버로부터 받은 토큰 변수에 할당
         // const jwtToken = res.data.result.user.token;
 
@@ -87,10 +85,10 @@ const LoginDB = (user_id, password) => {
 
         // // 통신 시 헤더에 default 값으로 저장
         // axios.defaults.headers.common["Authorization"] = `${jwtToken}`;
-        console.log(res)
+        console.log(res.data.token);
 
-        setCookie('is_login', res.data.id, 3);
-        sessionStorage.setItem("token", "user.data.token에서 나온값")
+        setCookie("is_login", res.data.token, 3);
+        // sessionStorage.setItem("token", "user.data.token에서 나온값")
 
         //  토큰을 어디어디에 넣어주는건가??....
 
@@ -99,25 +97,27 @@ const LoginDB = (user_id, password) => {
           user_name: res.data.user_name,
           // user_profile: res.data.user_profile,
           id: res.data.id,
-        })
+        });
 
-				dispatch(setUser({
-          user_id: res.data.user_id,
-          user_name: res.data.user_name,
-          // user_profile: res.data.user_profile,
-          id: res.data.id,
-        }));
+        dispatch(
+          setUser({
+            user_id: res.data.user_id,
+            user_name: res.data.user_name,
+            // user_profile: res.data.user_profile,
+            id: res.data.id,
+          })
+        );
 
         history.replace("/");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log("우리 마주치지 말자... 제발... 어휴", err);
         return;
       });
   };
 };
 
-// 로그인 후 회원 정보 조회 // 새로고침시 활성화 
+// 로그인 후 회원 정보 조회 // 새로고침시 활성화
 const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
     // 로그인 시 쿠키에 이미 is_login으로 토큰이 저장되어 있기 때문에
@@ -133,30 +133,36 @@ const loginCheckDB = () => {
 
     // console.log(axios.defaults.headers);
 
-    axios({
-      method: "get",
-      url: `http://15.164.222.116/api/islogin`
-    })
-      .then((res) => {
-        console.log(res);
-        const user = {
-          id: res.data.id,
-          user_id: res.data.user_id,
-          user_name: res.data.user_name,
-          user_profile: res.data.user_profile,
-        };
-        dispatch(setUser(user));
-      })
-      .catch((err) => {
-        console.log("유저정보 조회 에러", err);
-      });
+
+    // 임시로!!!!!!
+    dispatch(setUser());
+
+    // get으로 유저 정보 불러올수 있으면, 밑에 껄 이용해서 하자.
+
+    // axios({
+    //   method: "get",
+    //   // url: `http://15.164.222.116/api/islogin`
+    // })
+    //   .then((res) => {
+    //     console.log(res);
+    //     const user = {
+    //       id: res.data.id,
+    //       user_id: res.data.user_id,
+    //       user_name: res.data.user_name,
+    //       // user_profile: res.data.user_profile,
+    //     };
+    //     dispatch(setUser(user));
+    //   })
+    //   .catch((err) => {
+    //     console.log("유저정보 조회 에러", err);
+    //   });
   };
 };
 
 const logOutDB = () => {
   return function (dispatch, getState, { history }) {
-    console.log("logOut 버튼 눌림")
-    dispatch(logOut())
+    console.log("logOut 버튼 눌림");
+    dispatch(logOut());
   };
 };
 
@@ -164,13 +170,13 @@ const logOutDB = () => {
 export default handleActions(
   {
     [LOG_IN]: (state, action) =>
-    produce(state, (draft) => {
-        console.log(action)
-        draft.user = action.payload.user.user_name;
+      produce(state, draft => {
+        console.log(action);
+        // draft.user = action.payload.user.user_name;
         draft.is_login = true;
       }),
     [LOG_OUT]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         deleteCookie("is_login");
         draft.user = null;
         draft.is_login = false;
@@ -185,7 +191,7 @@ const actionCreators = {
   LoginDB,
 
   loginCheckDB,
-  signUpDB
+  signUpDB,
 };
 
 export { actionCreators };
