@@ -1,8 +1,12 @@
 import React from "react";
 import "./App.css";
 
-import { BrowserRouter, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "../redux/configStore";
+
 import { actionCreators as userActions } from "../redux/modules/user";
+import { useDispatch } from "react-redux";
 
 import Header from "../components/Header";
 import Main from "../pages/Main";
@@ -12,35 +16,35 @@ import PostWrite from "../pages/PostWrite";
 import PostDetail from "../pages/PostDetail";
 import Footer from "../components/Footer";
 import { Grid } from "../elements";
-import { useDispatch } from "react-redux";
+import { getCookie } from "./Cookie";
 
 function App() {
-const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-const is_session = localStorage.getItem("userName") ? true : false ;
+  const is_session = sessionStorage.getItem("token") ? true : false;
 
-console.log(is_session)
+  console.log(is_session);
+  console.log(getCookie("is_login"))
 
-React.useEffect(() => {
-  if (is_session) {
-    console.log("됨")
-    dispatch(userActions.loginCheckDB());
-  }
-}, []);
+  React.useEffect(() => {
+    if (is_session) {
+      dispatch(userActions.loginCheckDB());
+    }
+  }, []);
 
   return (
     <React.Fragment>
-      <BrowserRouter>
-        <Grid >
-        <Header />
-        <Route path="/" exact component={Main} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/signup" exact component={Signup} />
-        <Route path="/posts" exact component={PostWrite} />
-        <Route path="/detail" exact component={PostDetail} />
-        <Footer />
+      <ConnectedRouter history={history}>
+        <Grid>
+          <Header />
+          <Route path="/" exact component={Main} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Signup} />
+          <Route path="/posts" exact component={PostWrite} />
+          <Route path="/detail" exact component={PostDetail} />
+          <Footer />
         </Grid>
-      </BrowserRouter>
+      </ConnectedRouter>
     </React.Fragment>
   );
 }

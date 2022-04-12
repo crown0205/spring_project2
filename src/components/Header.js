@@ -12,14 +12,13 @@ const Header = props => {
   const history = useHistory();
   const dispatch = useDispatch()
 
-  console.log(useSelector(state => state.user.is_login));
   const is_login = useSelector(state => state.user.is_login);
-  const user_name = useSelector(state => state.user.user);
 
+  // 로그인시 유지 닉네임
+  const user_name = useSelector(state => state.user.user); 
+  console.log(user_name)
 
-  const is_session = localStorage.getItem("userName") ? true : false;
-                                              // ⬆️ 여기에 저장소에 있는 키값을 넣어야된다.
-
+  const is_session = sessionStorage.getItem("token") ? true : false;
   console.log(is_login, is_session)
 
   if (is_login && is_session) {
