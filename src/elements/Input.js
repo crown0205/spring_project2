@@ -5,6 +5,7 @@ import { Text, Grid } from "./index";
 
 const Input = (props) => {
   const {
+    name,
     label,
     type,
     value,
@@ -29,6 +30,8 @@ const Input = (props) => {
       <Grid>
         <Font>{label && <Text margin="0px">{label}</Text>}</Font>
         <TextareaBox
+          name={name}
+          value={value}
           rows={10}
           placeholder={placeholder}
           onChange={_onChange}
@@ -42,6 +45,7 @@ const Input = (props) => {
       <Font>{label && <Text>{label}</Text>}</Font>
       {is_onSubmit?(
       <InputBox
+        name={name}
         value={value}
         type={type}
         placeholder={placeholder}
@@ -50,12 +54,19 @@ const Input = (props) => {
           if(e.key === "Enter"){
             onSubmit(e);}}}
         {...styles}/>)
-        :(<InputBox type={type} placeholder={placeholder} onChange={_onChange} {...styles}/>)}
+        :(<InputBox 
+          name={name}
+          value={value}
+          type={type} 
+          placeholder={placeholder} 
+          onChange={_onChange} 
+          {...styles}/>)}
     </React.Fragment>
   );
 };
 
 Input.defaultProps = {
+  name:"",
   multiLine: false,
   type: "text",
   value: "",

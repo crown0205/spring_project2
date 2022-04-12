@@ -1,14 +1,24 @@
-import React from "react";
-// import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Grid } from "../elements/index";
-// import { actionCreator as postActions } from "../redux/modules/post";
+import { actionCreators as postActions } from "../redux/modules/post";
 
 import Card from "../components/Card";
+
 // import Menu from "../component/Menu";
 // import Likes from "../element/Likes";
 
 const Main = () => {
+  const dispatch = useDispatch();
+  const post_list=useSelector((state)=>state.post.list);
+  console.log(post_list);
+
+  React.useEffect(()=>{
+    if(post_list.length === 0){
+        dispatch(postActions.getPostDB());
+    }
+  })
   return (
     <React.Fragment>
       <Grid Minh="75vh">

@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 
+import Image from "./modules/image";
 import User from "./modules/user";
 import Post from "./modules/post";
 import Comment from "./modules/comment";
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   user: User,
   post: Post,
   comment: Comment,
+  image:Image,
   // 만든 history랑 라우터를 연결시켜 줌
   router: connectRouter(history),
 });
