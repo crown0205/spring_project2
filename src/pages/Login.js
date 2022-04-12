@@ -1,8 +1,28 @@
 import React from "react";
 
-import { Input, Grid, Text, Button } from "../elements/index";
+import { getCookie, setCookie } from "../shared/Cookie";
+import { actionCreators as userActions } from "../redux/modules/user";
+import _ from "lodash";
 
-const Login = (props) => {
+import { Input, Grid, Text, Button } from "../elements/index";
+import { useDispatch } from "react-redux";
+
+const Login = props => {
+  const dispatch = useDispatch();
+
+  const [id, setId] = React.useState("");
+  const [pwd, setPwd] = React.useState("");
+
+  const login = () => {
+    if (id === "" || pwd === "") {
+      window.alert("입력란이 비어있습니다~~!");
+      return;
+    }
+
+    console.log({ id, pwd });
+    dispatch(userActions.LoginDB(id, pwd));
+  };
+
   return (
     <React.Fragment>
       <Grid>
@@ -19,18 +39,37 @@ const Login = (props) => {
             </Text>
 
             <Grid padding="10px 0">
-              <Input label="아이디" placeholder="이메일을 입력해주세요" />
+              <Input
+                label="아이디"
+                placeholder="이메일을 입력해주세요"
+                _onChange={e => {
+                  setId(e.target.value);
+                }}
+              />
             </Grid>
             <Grid padding="10px 0">
-              <Input
-                label="비밀번호"
-                type="password"
-                placeholder="비밀번호를 입력해주세요"
-              />
+              <form>
+                <Input
+                  label="비밀번호"
+                  type="password"
+                  placeholder="비밀번호를 입력해주세요"
+                  // submit={()=>{}}
+                  _onChange={e => {
+                    setPwd(e.target.value);
+                  }}
+                />
+              </form>
             </Grid>
 
             <Grid width="100%" center margin="30px auto">
-              <Button text="회원가입" padding="10px" />
+              <Button
+                text="로그인"
+                padding="10px"
+                _onClick={() => {
+                  console.log("cookie get!!!");
+                  login();
+                }}
+              />
             </Grid>
           </Grid>
         </Grid>
