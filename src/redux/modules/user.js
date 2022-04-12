@@ -54,6 +54,7 @@ const signUpDB = (user_id,  user_name, password, passwordConfirm) => {
       },
     })
       .then((user) => {
+        console.log(user)
         window.alert("회원가입을 축하드립니다!");
         history.push("/login");
       })
@@ -86,6 +87,7 @@ const LoginDB = (userId, password) => {
 
         // // 통신 시 헤더에 default 값으로 저장
         // axios.defaults.headers.common["Authorization"] = `${jwtToken}`;
+        console.log(res)
 
         setCookie('is_login', res.data.id, 3);
         sessionStorage.setItem("token", "user.data.token에서 나온값")
@@ -95,21 +97,21 @@ const LoginDB = (userId, password) => {
         console.log({
           user_id: res.data.user_id,
           user_name: res.data.user_name,
-          user_profile: res.data.user_profile,
+          // user_profile: res.data.user_profile,
           id: res.data.id,
         })
 
 				dispatch(setUser({
           user_id: res.data.user_id,
           user_name: res.data.user_name,
-          user_profile: res.data.user_profile,
+          // user_profile: res.data.user_profile,
           id: res.data.id,
         }));
 
         history.replace("/");
       })
       .catch((err) => {
-        console.log("아이디 혹은 비밀번호가 일치하지 않습니다.");
+        console.log("우리 마주치지 말자... 제발... 어휴", err);
         return;
       });
   };
@@ -132,8 +134,8 @@ const loginCheckDB = () => {
     // console.log(axios.defaults.headers);
 
     axios({
-      method: "post",
-      url: `https://6251cd887f7fa1b1dddf398b.mockapi.io/user`
+      method: "get",
+      url: `http://15.164.222.116/api/islogin`
     })
       .then((res) => {
         console.log(res);

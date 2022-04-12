@@ -10,17 +10,17 @@ import { useDispatch } from "react-redux";
 const Login = props => {
   const dispatch = useDispatch();
 
-  const [id, setId] = React.useState("");
-  const [pwd, setPwd] = React.useState("");
+  const [userId, setId] = React.useState("");
+  const [password, setPwd] = React.useState("");
 
   const login = () => {
-    if (id === "" || pwd === "") {
+    if (userId === "" || password === "") {
       window.alert("입력란이 비어있습니다~~!");
       return;
     }
 
-    console.log({ id, pwd });
-    dispatch(userActions.LoginDB(id, pwd));
+    console.log({ userId, password });
+    dispatch(userActions.LoginDB(userId, password));
   };
 
   return (
@@ -51,7 +51,7 @@ const Login = props => {
               <form>
                 <Input
                   label="비밀번호"
-                  type="password"
+                  // type="password"
                   placeholder="비밀번호를 입력해주세요"
                   // submit={()=>{}}
                   _onChange={e => {
@@ -66,7 +66,7 @@ const Login = props => {
                 text="로그인"
                 padding="10px"
                 _onClick={() => {
-                  console.log("cookie get!!!");
+                  console.log("Login!!!");
                   login();
                 }}
               />
