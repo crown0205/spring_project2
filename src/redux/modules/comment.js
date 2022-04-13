@@ -15,9 +15,8 @@ const ADD_COMMENT = "ADD_COMMENT";
 
 const LOADING = "LOADING";
 
-const setComment = createAction(SET_COMMENT, (postId,comments) => ({
-  postId,
-  comments,
+const setComment = createAction(SET_COMMENT, (commentlist) => ({
+  commentlist
 }));
 const addComment = createAction(ADD_COMMENT, (commentWrap) => ({
   commentWrap,
@@ -32,7 +31,8 @@ const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
 const initialState={
   list:[
     {postId:"pos1",user_id:"test1",user_name:"리액트",comment: "너무 멋진 사진이군요"}
-    ,{postId:"pos1",user_id:"test2",user_name:"노드",comment: "굳굳"}],
+    ,{postId:"pos1",user_id:"test2",user_name:"노드",comment: "굳굳"}
+  ],
     is_loading: true,
 }
 //2번
@@ -41,16 +41,19 @@ const initialState={
 //
 
 //댓글 가져와서 리듀서로 던지기
+//미들웨어
+
 const loadingCommentDB = () =>{
   return function (dispatch,getState,{history}){
     axios({
       method:"get",
-      url:"https://6253d1d889f28cf72b5335ef.mockapi.io/comments",
+      url:"https://6253d1d889f28cf72b5335ef.mockapi.io/comments/",
     }).then((docs)=>{
       //3번 dispatch로 액션함수한테 던짐
-      dispatch(loading(docs))
+      // dispatch(loading(docs))
 
-    //   console.log(docs.data);
+      console.log(docs.data);
+      dispatch(setComment(docs.data))
     //   let comment_list=[];
     //   // console.log(docs.data.length);
 
@@ -75,7 +78,7 @@ const loadingCommentDB = () =>{
     }
   }
 
-const setCommentFB = (user_name) => {
+const setCommentDB = (user_name) => {
   return function (dispatch, getState, { history }) {
     if (!user_name) {
       return;
@@ -86,29 +89,21 @@ const setCommentFB = (user_name) => {
 
 }
 //댓글 입력하기
-const addCommentDB = (postId=null,user_id,user_name,comments,createAt) => {
+const addCommentDB = (user_name,comment) => {
 
   return function (dispatch, getState, { history }) {
-  //   const post={
-  //     postId:postId,
-  //     user_id:user_id,
-  //     user_name:user_name,
-  //     comment:commentWrap,
-  //     createAt: moment().format("YYYY-MM-DD hh:mm:ss"),//시간
-  //   }
-  //   dispatch(addComment(post));
-  // }
-  axios({
-    method:"post",
-    // url:"https://6253d1d889f28cf72b5335ef.mockapi.io/comments",
-    url:"http://15.164.222.116/user/signup",
-  }).then((docs)=>{
-    
-      console.log(docs.data.comment)
-    })
-    .catch(err=>{
-    console.log("댓글 정보를 가져올 수가 없네요!")
-  })
+    console.log(user_name,comment)
+  // axios({
+  //   method:"post",
+  //   url:"https://6253d1d889f28cf72b5335ef.mockapi.io/comments",
+  //   // url:"http://15.164.222.116/user/signup",
+  // }).then((docs)=>{
+  //   })
+  //   .catch(err=>{
+  //   console.log("댓글 정보를 가져올 수가 없네요!")
+  // })
+    const commentWrap = {postId:"pos3",user_id:"test3",user_name:user_name,comment:comment}
+    dispatch(addComment(commentWrap))
   }
 }
 //리듀서
@@ -118,12 +113,14 @@ export default handleActions(
       produce(state, (draft) => {
         // let list=[];
         // draft.list.push(...action.payload.comments);
-        console.log(...action.payload.postId)
+        console.log(action.payload.commentlist)
+        draft.list = action.payload.commentlist;
       }),
 
     [ADD_COMMENT]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.unshift(action.payload.commentWrap);
+        console.log(action.payload.commentWrap) 
+        draft.list.push(action.payload.commentWrap);
       }),
 
     //6번
@@ -142,7 +139,7 @@ export default handleActions(
   initialState);
 
 const actionCreators = {
-  setCommentFB,
+  setCommentDB,
   addCommentDB,
   setComment,
   addComment,

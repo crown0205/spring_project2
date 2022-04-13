@@ -15,22 +15,22 @@ const CommentList = (props) => {
   //7번
   //리덕스에 저장된 데이터 불러오기
   //필요한 데이터 찾아내기
-  const comment_list = useSelector((state)=>state.comment.is_loading.data);
-  
+  // const comment_list = useSelector((state)=>state.comment.is_loading);
+
 
   const comment_box = useSelector((state)=>state.comment.list);
   console.log(comment_box);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(commentActions.setCommentFB(comment_list));
+    dispatch(commentActions.loadingCommentDB())
   }, []);
 
   return (
     <React.Fragment>
       {/*8번 리덕스에서 뽑아낸 데이터 map으로 돌림 */}
-      {comment_list && comment_list.map((list,i)=>{
-          return <CommentItem key={i} {...list}/>//코멘트 아이디
+      {comment_box && comment_box.map((list,i)=>{
+          return <CommentItem key={i} {...list}/>//코멘트 아이디 
         })}
     </React.Fragment>
   );
@@ -58,9 +58,9 @@ const CommentItem = (props) => {
         {/* 삭제 버튼 */}
         <Grid width="10%">
         
-          <Button bg="#eebab5" color="#fff" _onClick={()=>{
-            window.alert("댓글이 삭제되었습니다.!")
-          }}>x</Button>
+        <Button bg="#eebab5" color="#fff" _onClick={()=>{
+          window.alert("댓글이 삭제되었습니다.!" )
+        }}>x</Button>
         </Grid>
       </Grid>
       <hr color="#fff" />

@@ -21,7 +21,7 @@ const PostDetail = (props) => {
 
   const comments=useSelector((state) => state.comment.list);
 
-  const post_list = useSelector(store => store.post.list);
+  const post_list = useSelector(state => state.post.list);
   console.log(post_list)
   const post_idx = post_list.findIndex(p => p.post_id === post_id);
   console.log(post_idx)
@@ -39,10 +39,7 @@ const PostDetail = (props) => {
   // React.useEffect(()=>{
   //   dispatch(commentActions.loadingCommentDB())
     
-  //   if(!post){
-  //     return;
-  //   }
-  //   dispatch(postActions.getOnePostDB(id));
+
   // },[]) 
 
   return (

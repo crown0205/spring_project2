@@ -21,15 +21,13 @@ const CommentWrite = (props) =>{
 
     //comment_box가 잘 들어가는지 확인
     const write = ()=>{
-        const { postId, user_id, user_name,comment,createAt} = props; 
-        console.log(comment_box);
         //댓글을 입력하지 않았을 경우
         if(!comment_box){
             window.alert("댓글을 입력해주세요.")
             return;
         }
-        dispatch(commentActions.addCommentDB("postId","userId",username,comment_box));
-        
+        dispatch(commentActions.addCommentDB(username,comment_box));
+        // console.log(username,comment_box);
         setCommentBox("");//댓글 적은 거 입력하고 나면 리셋되도록
     }
 
