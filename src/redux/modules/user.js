@@ -96,14 +96,14 @@ const LoginDB = (user_id, password) => {
         //   id: res.data.id,
         // });
 
-        // dispatch(
-        //   setUser({
-        //     user_id: res.data.user_id,
-        //     user_name: res.data.user_name,
-        //     // user_profile: res.data.user_profile,
-        //     id: res.data.id,
-        //   })
-        // );
+        dispatch(
+          setUser({
+            user_id: res.data.user_id,
+            user_name: res.data.user_name,
+            // user_profile: res.data.user_profile,
+            id: res.data.id,
+          })
+        );
 
         history.replace("/");
       })
@@ -132,7 +132,7 @@ const loginCheckDB = () => {
 
 
     // 임시로!!!!!!
-    // dispatch(setUser());
+    dispatch(setUser());
 
     // get으로 유저 정보 불러올수 있으면, 밑에 껄 이용해서 하자.
 
