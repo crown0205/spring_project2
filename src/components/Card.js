@@ -12,7 +12,7 @@ const Card = (props) => {
     <React.Fragment>
       <DIV
         onClick={() => {
-          history.push("/detail");
+          history.push(`/detail/${props.post_id}`);
         }}
       >
         <Grid>
@@ -20,17 +20,17 @@ const Card = (props) => {
           <Grid padding="16px"></Grid>
           <Grid>
             
-            <Image shape="rectangle" height="60%" src={props.src} />
+            <Image shape="rectangle" height="60%" src={props.img} />
 
             <Contents>
 
               <Title>{props.title}</Title>
 
-              <PostContent>{props.context}</PostContent>
+              <PostContent>{props.contents}</PostContent>
               <Bottom>
                 <Profile>
                   <span>
-                    by<b> {props.nickname}</b>
+                    by <b>{props.user_name}</b>
                   </span>
                 </Profile>
                 <LikeCntWrap>{props.likeCnt}개</LikeCntWrap>

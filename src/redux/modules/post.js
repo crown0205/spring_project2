@@ -29,17 +29,17 @@ const initialPost = {
   comment_cnt: 0,
 };
 
-
 //DB에 게시글 정보 저장하기
 const addPostDB = formData => {
   return function (dispatch, getState, { history }) {
-
     // getState().user 에서 정보를 찾거나, 여러 루트 생각해보기.
     //  유저 정보 찾아오기.
 
-    // for (var pair of formData.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
+
+    console.log("DB로 넘어간다.");
     axios({
       // method: "post",
       url: "https://6251cd887f7fa1b1dddf398b.mockapi.io/post",
@@ -48,16 +48,12 @@ const addPostDB = formData => {
       // data: formData,
       // headers: { "Content-Type": "multipart/form-data" },
 
-      // DB에 연결 어떻게 할껀지... 
+      // DB에 연결 어떻게 할껀지...
       // DB에 넘길때  유저 정보 찾아서 유저의 고유 아이디 값 같이 넘겨줘야된다.
       // 그래야 누구 게시물인지 파악 할수 있다.
-
     })
       .then(res => {
         console.log(res);
-
-
-
 
         // dispatch(imageAction.setPreview(null));  <== preview 값을 null로 바꿔줘야됨.
         // history.push("/");
@@ -86,30 +82,70 @@ const addPostDB = formData => {
 //DB 데이터 불러오기
 const getPostDB = () => {
   return function (dispatch, getState, { history }) {
+    const post_list = [];
+
     axios({
-        method: "get",
-        url: `https://6251cd887f7fa1b1dddf398b.mockapi.io/post`
+      method: "get",
+      url: `https://6251cd887f7fa1b1dddf398b.mockapi.io/post`,
+    })
+      .then(posts => {
+        // console.log(posts.data);
+
+        // posts.data.forEach((list) => {
+        //   let _post = posts.data;
+
+        //   let post = Object.keys(_post).reduce((acc, cur) => {
+        //     console.log({acc, cur})
+        //     return { ...acc, [cur]: _post[cur]}
+        //   },{});
+        //   post_list.push(post)
+        // });
+
+        // console.log(post_list)
+
+
+        dispatch(setPost(posts.data));
+
+        // const postDB = instance;
+        // let all_list = [];
+        // // let best_list = [];
+        // // let normal_list = [];
+
+        // postDB.get("/user/main").then(res => {
+        //   console.log("!!!!!전체 LIST 서버에서 가져왔다!!!!!", res.data);
+        //   res.data.forEach(list => {
+        //     let post = Object.keys(list).reduce((acc, cur) => {
+        //       return { ...acc, [cur]: list[cur] };
+        //     }, {});
+        //     all_list.push(post);
+        //   });
+        //   dispatch(setPost(all_list));
+        // });
+
+        // post 정보 불러와서 main에 뿌리기.
+        // params 이용해서 상세페이지 이동. == 연동?
+
+        //  title , contents, url을 지정해서 뿌려줘야 됨.
+
+        // detail로 가는 방법
+        // Index 찾아서 넣기
       })
-        .then((res) => {
-          console.log(res)
-          // post 정보 불러와서 main에 뿌리기.
-          // params 이용해서 상세페이지 이동. == 연동?
-
-          //  title , contents, url을 지정해서 뿌려줘야 됨.
-
-          // detail로 가는 방법 
-          // Index 찾아서 넣기
-        })
-        .catch((err) => {
-          console.log("유저정보 조회 에러", err);
-        });
+      .catch(err => {
+        console.log("유저정보 조회 에러", err);
+      });
   };
 };
 
 //reducer
 export default handleActions(
   {
-    [SET_POST]: (state, action) => produce(state, draft => {}),
+    [SET_POST]: (state, action) =>
+      produce(state, draft => {
+        // console.log("여기~~!!!");
+        // console.log(action);
+
+        draft.list = action.payload.post_list
+      }),
     [ADD_POST]: (state, action) =>
       produce(state, draft => {
         draft.list.unshift(action.payload.post); //배열의 맨 앞에 넣어줘야해. push를 쓰면 배열의 뒤로 붙게됨

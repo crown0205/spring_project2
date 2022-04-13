@@ -23,9 +23,6 @@ function App() {
 
   const is_session = getCookie("is_login") ? true : false;
 
-
-  // console.log(getCookie("is_login"))
-
   React.useEffect(() => {
     if (is_session) {
       dispatch(userActions.loginCheckDB());
@@ -41,7 +38,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/posts" exact component={PostWrite} />
-          <Route path="/detail" exact component={PostDetail} />
+          <Route path="/detail/:post_num" exact component={PostDetail} />
           <Footer />
         </Grid>
       </ConnectedRouter>

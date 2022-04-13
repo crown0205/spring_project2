@@ -5,32 +5,46 @@ import { Grid } from "../elements/index";
 import { actionCreators as postActions } from "../redux/modules/post";
 
 import Card from "../components/Card";
+import { map } from "lodash";
 
 // import Menu from "../component/Menu";
 // import Likes from "../element/Likes";
 
-const Main = () => {
+const Main = props => {
+  const { history } = props;
   const dispatch = useDispatch();
-  const post_list=useSelector((state)=>state.post.list);
-  console.log(post_list);
+  const post_list = useSelector(state => state.post.list);
+  // console.log(post_list);
 
-  React.useEffect(()=>{
-    if(post_list.length === 0){
-        dispatch(postActions.getPostDB());
+
+  React.useEffect(() => {
+    if (post_list.length === 0) {
+      dispatch(postActions.getPostDB());
     }
-  })
+  }, []);
+  
   return (
     <React.Fragment>
       <Grid Minh="75vh">
-        <Grid width="40%" margin="auto" >
+        <Grid width="40%" margin="auto">
           <MainWrap>
             {/* <Menu /> */}
             <PostList>
+              {post_list.map((item, index) => {
+
+                return(<Card
+                  key={`post${item.post_id}`}
+                  {...item}
+                  _onClick={() => {
+                    history.push(`/detail/${item.post_id}`);
+                  }}
+                />);
+              })}
+              {/* <Card />
               <Card />
               <Card />
               <Card />
-              <Card />
-              <Card />
+              <Card /> */}
             </PostList>
           </MainWrap>
         </Grid>
@@ -42,7 +56,7 @@ const Main = () => {
 const MainWrap = styled.div``;
 
 const PostList = styled.div`
-  margin:  5%;
+  margin: 5%;
   @media screen and (max-width: 1024px) {
     margin: 130px 1%;
   }
