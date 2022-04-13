@@ -15,7 +15,7 @@ const Header = props => {
   const is_login = useSelector(state => state.user.is_login);
 
   // 로그인시 유지 닉네임
-  const user_name = useSelector(state => state.user.user); 
+  const user_name = useSelector(state => state.user.user_name); 
   console.log(user_name)
 
   const is_session = getCookie("is_login") ? true : false;
@@ -97,7 +97,6 @@ const Header = props => {
                 padding="10px"
                 width="90px"
                 _onClick={() => {
-                  console.log("됨??");
                   history.push("/login");
                 }}
               ></Button>

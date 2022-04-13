@@ -15,8 +15,8 @@ const logOut = createAction(LOG_OUT, user => ({ user }));
 
 //  초기값
 const initialState = {
-  user_id:"test@test.com",
-  user_name: "minggiject",
+  // user_id:"test@test.com",
+  // user_name: "minggiject",
   is_login: false,
 };
 
@@ -84,8 +84,6 @@ const LoginDB = (user_id, password) => {
         // axios.defaults.headers.common["Authorization"] = `${jwtToken}`;
         console.log(res.data)
 
-        console.log(res.data.token);
-
         setCookie("is_login", res.data.token, 3);
 
 
@@ -100,8 +98,7 @@ const LoginDB = (user_id, password) => {
           setUser({
             user_id: res.data.user_id,
             user_name: res.data.user_name,
-            // user_profile: res.data.user_profile,
-            id: res.data.id,
+            uid: res.data._id,
           })
         );
 
@@ -132,7 +129,7 @@ const loginCheckDB = () => {
 
 
     // 임시로!!!!!!
-    dispatch(setUser());
+    // dispatch(setUser());
 
     // get으로 유저 정보 불러올수 있으면, 밑에 껄 이용해서 하자.
 
@@ -178,8 +175,11 @@ export default handleActions(
   {
     [LOG_IN]: (state, action) =>
       produce(state, draft => {
-        // console.log(action);
-        // draft.user = action.payload.user.user_name;
+        console.log()
+        console.log(action);
+        draft.user_id = action.payload.user.user_id
+        draft.user_name = action.payload.user.user_name
+        draft.uid = action.payload.user.uid
         draft.is_login = true;
       }),
     [LOG_OUT]: (state, action) =>

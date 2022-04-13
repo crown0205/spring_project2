@@ -7,7 +7,6 @@ import Image from "../elements/Image";
 import { useHistory } from "react-router-dom";
 
 const Card = (props) => {
-  console.log(props)
   const history = useHistory();
   return (
     <React.Fragment>
