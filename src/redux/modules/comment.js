@@ -15,8 +15,8 @@ const ADD_COMMENT = "ADD_COMMENT";
 
 const LOADING = "LOADING";
 
-const setComment = createAction(SET_COMMENT, (post_id,comments) => ({
-  post_id,
+const setComment = createAction(SET_COMMENT, (postId,comments) => ({
+  postId,
   comments,
 }));
 const addComment = createAction(ADD_COMMENT, (commentWrap) => ({
@@ -28,19 +28,19 @@ const addComment = createAction(ADD_COMMENT, (commentWrap) => ({
 
 const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
 
+//초기값
 const initialState={
   list:[
-    {post_id:"pos1",comment_id:"com1",user_name:"리액트",comment: "너무 멋진 사진이군요"}
-    ,{post_id:"pos1",comment_id:"com1",user_name:"노드",comment: "와 정말 예쁘네요^^"}],
+    {postId:"pos1",user_id:"test1",user_name:"리액트",comment: "너무 멋진 사진이군요"}
+    ,{postId:"pos1",user_id:"test2",user_name:"노드",comment: "굳굳"}],
     is_loading: true,
 }
-
-
 //2번
 //postDetail에서 dispatch 받아서 미들웨어
 //db에 데이터 던져주고 다시 db에서 데이터 받아서 dispatch로 리듀서에 던짐
 //
 
+//댓글 가져와서 리듀서로 던지기
 const loadingCommentDB = () =>{
   return function (dispatch,getState,{history}){
     axios({
@@ -50,24 +50,30 @@ const loadingCommentDB = () =>{
       //3번 dispatch로 액션함수한테 던짐
       dispatch(loading(docs))
 
-      // console.log(docs.data);
-      // let list=[];
-      // console.log(docs.data.length);
+    //   console.log(docs.data);
+    //   let comment_list=[];
+    //   // console.log(docs.data.length);
 
-      // docs.forEach((doc)=>{
-      //   console.log(doc)
-      //   list.push({...doc.data})
-      // })
-      // console.log(list);
+    //   docs.forEach((comment)=>{
+    //     console.log(comment)
 
-      // const test1 = doc.data[0].comment
-      // const test2 = doc.data[0].user_name
-      // console.log(test1)
-      // console.log(test2)
-
+    //     comment_list.push({
+    //       postId:comment.postId,
+    //       user_id:comment.user_id,
+    //       user_name:comment.user_name,
+    //       comment:comment.comment,
+    //       createAt: moment().format("YYYY-MM-DD hh:mm:ss"),//시간
+    //     })
+    //   })
+    //   console.log(comment_list);
+    //   dispatch(loading(comment_list));
+    //   // const test1 = doc.data[0].comment
+    //   // const test2 = doc.data[0].user_name
+    //   // console.log(test1)
+    //   // console.log(test2)
     })
+    }
   }
-}
 
 const setCommentFB = (user_name) => {
   return function (dispatch, getState, { history }) {
@@ -80,45 +86,39 @@ const setCommentFB = (user_name) => {
 
 }
 //댓글 입력하기
-const addCommentDB = (post_id=null) => {
+const addCommentDB = (postId=null,user_id,user_name,comments,createAt) => {
 
   return function (dispatch, getState, { history }) {
   //   const post={
-  //     post_id:post_id,comment_id:"com1",user_name:"익명",comment:commentWrap
+  //     postId:postId,
+  //     user_id:user_id,
+  //     user_name:user_name,
+  //     comment:commentWrap,
+  //     createAt: moment().format("YYYY-MM-DD hh:mm:ss"),//시간
   //   }
   //   dispatch(addComment(post));
   // }
   axios({
-    method:"get",
-    url:"https://6253d1d889f28cf72b5335ef.mockapi.io/comments",
+    method:"post",
+    // url:"https://6253d1d889f28cf72b5335ef.mockapi.io/comments",
+    url:"http://15.164.222.116/user/signup",
   }).then((docs)=>{
-    let list=[];
-    docs.forEach((doc)=>{
-      list.push({...doc.data(), id:doc.id});
+    
+      console.log(docs.data.comment)
     })
-    dispatch(setComment(post_id,list));
-  }).catch(err=>{
+    .catch(err=>{
     console.log("댓글 정보를 가져올 수가 없네요!")
   })
   }
 }
-
 //리듀서
 export default handleActions(
   {
     [SET_COMMENT]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.push(...action.payload.comments);
-        console.log(...action.payload.comments)
-        draft.list = draft.list.reduce((acc, cur) => {
-
-          if (acc.findIndex((a) => a.commentId === cur.commentId) === -1) {
-            return [...acc, cur];
-          } else {
-            acc[acc.findIndex((a) => a.commentId === cur.commentId)] = cur;
-            return acc;
-          }
-        }, []);
+        // let list=[];
+        // draft.list.push(...action.payload.comments);
+        console.log(...action.payload.postId)
       }),
 
     [ADD_COMMENT]: (state, action) =>
@@ -135,7 +135,9 @@ export default handleActions(
         console.log(state,action)
         draft.is_loading = action.payload.is_loading;
         draft.list = action.payload.data;
+      console.log(action);
       }),
+      
   },
   initialState);
 
