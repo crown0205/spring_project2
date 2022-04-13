@@ -69,6 +69,7 @@ const signUpDB = (user_id, user_name, password, passwordConfirm) => {
 const LoginDB = (user_id, password) => {
   return function (dispatch, getState, { history }) {
     console.log({ user_id, password });
+    
     axios({
       method: "post",
       url: "http://15.164.222.116/user/login",
@@ -78,36 +79,31 @@ const LoginDB = (user_id, password) => {
       },
     })
       .then(res => {
-        // // 서버로부터 받은 토큰 변수에 할당
-        // const jwtToken = res.data.result.user.token;
-
-        // // 서버로 부터 받은 토큰을 쿠키에 저장 (key:value 형태)
-        // setCookie("is_login", jwtToken);
 
         // // 통신 시 헤더에 default 값으로 저장
         // axios.defaults.headers.common["Authorization"] = `${jwtToken}`;
+        console.log(res.data)
+
         console.log(res.data.token);
 
         setCookie("is_login", res.data.token, 3);
-        // sessionStorage.setItem("token", "user.data.token에서 나온값")
 
-        //  토큰을 어디어디에 넣어주는건가??....
 
-        console.log({
-          user_id: res.data.user_id,
-          user_name: res.data.user_name,
-          // user_profile: res.data.user_profile,
-          id: res.data.id,
-        });
+        // console.log({
+        //   user_id: res.data.user_id,
+        //   user_name: res.data.user_name,
+        //   // user_profile: res.data.user_profile,
+        //   id: res.data.id,
+        // });
 
-        dispatch(
-          setUser({
-            user_id: res.data.user_id,
-            user_name: res.data.user_name,
-            // user_profile: res.data.user_profile,
-            id: res.data.id,
-          })
-        );
+        // dispatch(
+        //   setUser({
+        //     user_id: res.data.user_id,
+        //     user_name: res.data.user_name,
+        //     // user_profile: res.data.user_profile,
+        //     id: res.data.id,
+        //   })
+        // );
 
         history.replace("/");
       })
@@ -136,23 +132,33 @@ const loginCheckDB = () => {
 
 
     // 임시로!!!!!!
-    dispatch(setUser());
+    // dispatch(setUser());
 
     // get으로 유저 정보 불러올수 있으면, 밑에 껄 이용해서 하자.
 
+
+
+    // --------------------------------------------
+
+    // const token = getCookie("is_login");
+
     // axios({
     //   method: "get",
-    //   // url: `http://15.164.222.116/api/islogin`
+    //   url: `http://15.164.222.116/api/checkLogin`,
+    //   headers: {
+    //     authorization: `Bearer ${token}`
+    //   }
     // })
     //   .then((res) => {
+    //   //  로그인체크 데이터 잘  넘어 오는지 확인하고 백엔드에 알려주기~!
     //     console.log(res);
-    //     const user = {
-    //       id: res.data.id,
-    //       user_id: res.data.user_id,
-    //       user_name: res.data.user_name,
-    //       // user_profile: res.data.user_profile,
-    //     };
-    //     dispatch(setUser(user));
+    //     // const user = {
+    //     //   id: res.data.id,
+    //     //   user_id: res.data.user_id,
+    //     //   user_name: res.data.user_name,
+    //     //   // user_profile: res.data.user_profile,
+    //     // };
+    //     // dispatch(setUser(user));
     //   })
     //   .catch((err) => {
     //     console.log("유저정보 조회 에러", err);

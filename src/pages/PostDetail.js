@@ -17,22 +17,23 @@ const PostDetail = (props) => {
 //포스트 정보가 필요하다      
   const id=props.match.params.id;
   const comments=useSelector((state) => state.comment.list);
-  console.log(comments);
 
   const post_list = useSelector(store => store.post.list);
   const post_idx = post_list.findIndex(p => p.id === id);
   const post = post_list[post_idx];
+
     //새로고침 시 한번만 렌더링
     //commentloading 시작부분
   //1번 => comment.js 이동
-  React.useEffect(()=>{
-    dispatch(commentActions.loadingCommentDB())
+
+  // React.useEffect(()=>{
+  //   dispatch(commentActions.loadingCommentDB())
     
-    if(!post){
-      return;
-    }
-    dispatch(postActions.getOnePostDB(id));
-  },[]) 
+  //   if(!post){
+  //     return;
+  //   }
+  //   dispatch(postActions.getOnePostDB(id));
+  // },[]) 
 
   return (
     <React.Fragment>

@@ -10,17 +10,17 @@ import { useDispatch } from "react-redux";
 const Login = props => {
   const dispatch = useDispatch();
 
-  const [userId, setId] = React.useState("");
+  const [user_id, setId] = React.useState("");
   const [password, setPwd] = React.useState("");
 
   const login = () => {
-    if (userId === "" || password === "") {
+    if (user_id === "" || password === "") {
       window.alert("입력란이 비어있습니다~~!");
       return;
     }
 
-    console.log({ userId, password });
-    dispatch(userActions.LoginDB(userId, password));
+    console.log({ user_id, password });
+    dispatch(userActions.LoginDB(user_id, password));
   };
 
   return (
