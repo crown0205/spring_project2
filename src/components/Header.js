@@ -44,7 +44,7 @@ const Header = props => {
                 <span>🌸</span>
               </Font>
             </Grid>
-            <Grid is_flex>
+            <Grid is_flex >
               <Grid margin="0px 0px 0px 100px">
                 <Text>{user_name}님 환영합니다</Text>
               </Grid>
@@ -75,9 +75,9 @@ const Header = props => {
 
   return (
     <React.Fragment>
-      <Grid bg="#ffe0e0" is_flex fixed height="0px">
-        <Grid is_flex padding="3px 16px" width="55%" margin="auto" bg="#ffe0e0">
-          <Grid>
+      <Grid bg="#ffe0e0" is_flex fixed height="0px" padding="3px 16px">
+        <Grid is_flex width="70%" margin="auto" bg="#ffe0e0">
+          <Grid Minw="87px">
             <Font
               onClick={() => {
                 console.log("home");
@@ -89,8 +89,8 @@ const Header = props => {
               <span>🌸</span>
             </Font>
           </Grid>
-          <Grid is_flex>
-            <Grid margin="0px 0px 0px 100px">
+          <Grid is_flex width="auto" column="column">
+            <Grid margin="0px 0px 0px 170px">
               <Button
                 text="로그인"
                 margin="8px"

@@ -56,9 +56,9 @@ const Main = props => {
 const MainWrap = styled.div``;
 
 const PostList = styled.div`
-  margin: 5%;
+  margin: 190px -15%;
   @media screen and (max-width: 1024px) {
-    margin: 130px 1%;
+    margin: 190px -10%;
   }
   display: grid;
   margin-top: 150px;
