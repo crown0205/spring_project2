@@ -2,7 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import moment from "moment";
 import "moment";
-// import { api_token, api, test_api, test, test_api2, api_token2 } from "../../shared/api";
+import { getCookie } from "../../shared/Cookie";
 import axios from "axios";
 
 const SET_POST = "SET_POST";
@@ -13,6 +13,8 @@ const setPost = createAction(SET_POST, post_list => ({ post_list }));
 const addPost = createAction(ADD_POST, post => ({ post })); //게시글 리덕스에 저장하기
 
 // const editPost = createAction(EDIT_POST,(post_id, post)=>({post_id, post}));//게시글 수정
+const token = getCookie("is_login")
+// console.log(token)
 
 //초기값 설정
 const initialState = {
@@ -30,33 +32,30 @@ const initialPost = {
 };
 
 //DB에 게시글 정보 저장하기
-const addPostDB = formData => {
+const addPostDB = post => {
   return function (dispatch, getState, { history }) {
-    // getState().user 에서 정보를 찾거나, 여러 루트 생각해보기.
-    //  유저 정보 찾아오기.
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
 
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
+    console.log(post.title)
 
     console.log("DB로 넘어간다.");
     axios({
-      // method: "post",
-      url: "https://6251cd887f7fa1b1dddf398b.mockapi.io/post",
-      // url: "http://15.164.222.116/",   // 우리 서버~!!
-
-      // data: formData,
-      // headers: { "Content-Type": "multipart/form-data" },
-
-      // DB에 연결 어떻게 할껀지...
-      // DB에 넘길때  유저 정보 찾아서 유저의 고유 아이디 값 같이 넘겨줘야된다.
-      // 그래야 누구 게시물인지 파악 할수 있다.
+      method: "post",
+      url: "http://52.78.246.163/api/posts",  
+      data:{
+        title: post.title,
+        content: post.content
+      },
+      headers: { authorization: `Bearer ${token}`}
     })
       .then(res => {
         console.log(res);
+        console.log("포스터 등록 됨~~!?")
 
         // dispatch(imageAction.setPreview(null));  <== preview 값을 null로 바꿔줘야됨.
-        // history.push("/");
+        history.push("/");
         return;
       })
       .catch(err => {
@@ -64,18 +63,18 @@ const addPostDB = formData => {
         window.alert("나에게...희망을....줘......");
       });
 
-    axios({
-      method: "post",
-      url: `https://6251cd887f7fa1b1dddf398b.mockapi.io/post_list`,
-      data: formData,
-    })
-      .then(res => {
-        console.log(res);
-        console.log("done~!!");
-      })
-      .catch(err => {
-        console.log("유저정보 조회 에러", err);
-      });
+    // axios({
+    //   method: "post",
+    //   url: `https://6251cd887f7fa1b1dddf398b.mockapi.io/post_list`,
+    //   data: formData,
+    // })
+    //   .then(res => {
+    //     console.log(res);
+    //     console.log("done~!!");
+    //   })
+    //   .catch(err => {
+    //     console.log("유저정보 조회 에러", err);
+    //   });
   };
 };
 
@@ -86,10 +85,16 @@ const getPostDB = () => {
 
     axios({
       method: "get",
-      url: `https://6251cd887f7fa1b1dddf398b.mockapi.io/post`,
+      url: `http://52.78.246.163/api/main`, // 우리 서버
+      // url: `http://localhost:4000/posts`, // mockApi
+      // url: `https://6251cd887f7fa1b1dddf398b.mockapi.io/post`,
+      // headers: { "Content-Type": "multipart/form-data" },
+      // headers: {authorization: `Bearer ${token}`}
+
     })
       .then(posts => {
         // console.log(posts.data);
+        console.log(posts)
 
         // posts.data.forEach((list) => {
         //   let _post = posts.data;
@@ -142,7 +147,7 @@ export default handleActions(
     [SET_POST]: (state, action) =>
       produce(state, draft => {
         // console.log("여기~~!!!");
-        // console.log(action);
+
 
         draft.list = action.payload.post_list
       }),

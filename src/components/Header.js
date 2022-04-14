@@ -16,7 +16,7 @@ const Header = props => {
 
   // 로그인시 유지 닉네임
   const user_name = useSelector(state => state.user.user_name); 
-  console.log(user_name)
+  // console.log(user_name)
 
   const is_session = getCookie("is_login") ? true : false;
   console.log(is_login, is_session)

@@ -7,17 +7,17 @@ import Image from "../elements/Image";
 import { useHistory } from "react-router-dom";
 
 const Card = (props) => {
+  console.log(props.use_name)
   const history = useHistory();
   return (
     <React.Fragment>
       <DIV
         onClick={() => {
-          history.push(`/detail/${props.post_id}`);
+          history.push(`/detail/${props.id}`);
         }}
       >
         <Grid>
           <PostTime>{props.createAt}</PostTime>
-          <Grid padding="16px"></Grid>
           <Grid>
             
             <Image shape="rectangle" height="60%" src={props.img} />
@@ -30,7 +30,7 @@ const Card = (props) => {
               <Bottom>
                 <Profile>
                   <span>
-                    by <b>{props.user_name}</b>
+                    by <b>{props.use_name}</b>
                   </span>
                 </Profile>
                 <LikeCntWrap>{props.likeCnt}개</LikeCntWrap>

@@ -20,6 +20,8 @@ const initialState = {
   is_login: false,
 };
 
+const token = getCookie("is_login");
+
 // axios.get('').then((Response)=>{
 //     console.log(Response.data);
 // }).catch((Error)=>{
@@ -44,7 +46,7 @@ const signUpDB = (user_id, user_name, password, passwordConfirm) => {
 
     axios({
       method: "post",
-      url: "http://15.164.222.116/user/signup",
+      url: "http://52.78.246.163/user/signup",
       // 회원가입 시 입력 데이터 보내기(보내기만 하면 끝)
       data: {
         user_id: user_id,
@@ -69,31 +71,22 @@ const signUpDB = (user_id, user_name, password, passwordConfirm) => {
 const LoginDB = (user_id, password) => {
   return function (dispatch, getState, { history }) {
     console.log({ user_id, password });
-    
+
     axios({
       method: "post",
-      url: "http://15.164.222.116/user/login",
+      url: "http://52.78.246.163/user/login",
       data: {
         user_id: user_id,
         password: password,
       },
     })
       .then(res => {
-
         // // 통신 시 헤더에 default 값으로 저장
         // axios.defaults.headers.common["Authorization"] = `${jwtToken}`;
-        console.log(res.data)
+        console.log(res.data);
 
         setCookie("is_login", res.data.token, 3);
-
-
-        // console.log({
-        //   user_id: res.data.user_id,
-        //   user_name: res.data.user_name,
-        //   // user_profile: res.data.user_profile,
-        //   id: res.data.id,
-        // });
-
+        
         dispatch(
           setUser({
             user_id: res.data.user_id,
@@ -111,55 +104,27 @@ const LoginDB = (user_id, password) => {
   };
 };
 
-// 로그인 후 회원 정보 조회 // 새로고침시 활성화
 const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
-    // 로그인 시 쿠키에 이미 is_login으로 토큰이 저장되어 있기 때문에
-
-    //  서버연결 할때 토큰으로 다시 수정하기!!
-
-    // const jwtToken = getCookie("token");
-    // console.log(jwtToken);
-
-    // 새로고침하면 헤더 default도 날라가기 때문에 다시 토큰을 달아준다.
-    // 백엔드에서 헤더로 넘어온 Authorization 에서 토큰 값에서 토큰값을 뽑아주기로 함.
-    // axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
-
-    // console.log(axios.defaults.headers);
-
-
-    // 임시로!!!!!!
-    // dispatch(setUser());
-
-    // get으로 유저 정보 불러올수 있으면, 밑에 껄 이용해서 하자.
-
-
-
-    // --------------------------------------------
-
-    // const token = getCookie("is_login");
-
-    // axios({
-    //   method: "get",
-    //   url: `http://15.164.222.116/api/checkLogin`,
-    //   headers: {
-    //     authorization: `Bearer ${token}`
-    //   }
-    // })
-    //   .then((res) => {
-    //   //  로그인체크 데이터 잘  넘어 오는지 확인하고 백엔드에 알려주기~!
-    //     console.log(res);
-    //     // const user = {
-    //     //   id: res.data.id,
-    //     //   user_id: res.data.user_id,
-    //     //   user_name: res.data.user_name,
-    //     //   // user_profile: res.data.user_profile,
-    //     // };
-    //     // dispatch(setUser(user));
-    //   })
-    //   .catch((err) => {
-    //     console.log("유저정보 조회 에러", err);
-    //   });
+    axios({
+      method: "get",
+      url: `http://52.78.246.163/user/checkLogin`,
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+      .then(res => {
+        console.log(res);
+        // const user = {
+        //   id: res.data.id,
+        //   user_id: res.data.user_id,
+        //   user_name: res.data.user_name,
+        // };
+        // dispatch(setUser(user));
+      })
+      .catch(err => {
+        console.log("유저정보 조회 에러", err);
+      });
   };
 };
 
@@ -175,11 +140,11 @@ export default handleActions(
   {
     [LOG_IN]: (state, action) =>
       produce(state, draft => {
-        console.log()
+        console.log();
         console.log(action);
-        draft.user_id = action.payload.user.user_id
-        draft.user_name = action.payload.user.user_name
-        draft.uid = action.payload.user.uid
+        draft.user_id = action.payload.user.user_id;
+        draft.user_name = action.payload.user.user_name;
+        draft.uid = action.payload.user.uid;
         draft.is_login = true;
       }),
     [LOG_OUT]: (state, action) =>

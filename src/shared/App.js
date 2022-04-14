@@ -38,7 +38,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/posts" exact component={PostWrite} />
-          <Route path="/detail/:post_num" exact component={PostDetail} />
+          <Route path="/detail/:id" exact component={PostDetail} />
           <Footer />
         </Grid>
       </ConnectedRouter>

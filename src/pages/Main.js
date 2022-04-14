@@ -14,15 +14,15 @@ const Main = props => {
   const { history } = props;
   const dispatch = useDispatch();
   const post_list = useSelector(state => state.post.list);
-  // console.log(post_list);
 
+  // console.log(post_list)
 
   React.useEffect(() => {
     if (post_list.length === 0) {
       dispatch(postActions.getPostDB());
     }
   }, []);
-  
+
   return (
     <React.Fragment>
       <Grid Minh="75vh">
@@ -31,14 +31,8 @@ const Main = props => {
             {/* <Menu /> */}
             <PostList>
               {post_list.map((item, index) => {
-
-                return(<Card
-                  key={`post${item.post_id}`}
-                  {...item}
-                  _onClick={() => {
-                    history.push(`/detail/${item.post_id}`);
-                  }}
-                />);
+                console.log(item);
+                return <Card key={`post${item.id}`} {...item} />;
               })}
               {/* <Card />
               <Card />
@@ -56,9 +50,10 @@ const Main = props => {
 const MainWrap = styled.div``;
 
 const PostList = styled.div`
-  margin: 200px -15%;
+  margin: 0px -25%;
+  padding-top: 225px;
   @media screen and (max-width: 1024px) {
-    margin: 190px -45%;
+    margin: 0px -45%;
   }
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
