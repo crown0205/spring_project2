@@ -63,9 +63,10 @@ const DIV = styled.div`
   position: relative;
   box-sizing: border-box;
   transition: all 0.3s ease-out;
+  box-shadow: 1px 1px 2px 0px grey;
   cursor: pointer;
   &:hover {
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 5px 15px 0px;
+    box-shadow: rgba(71, 71, 81, 0.499) 0px 5px 15px 0px;
     -webkit-transform: scale(1.05);
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
@@ -107,7 +108,7 @@ const PostTime = styled.div`
   font-size: 0.75rem;
   line-height: 1.5;
   color: #ccc;
-  margin: 0rem 0rem 1rem 1rem;
+  margin: 1rem 0rem 1rem 1rem;
 `;
 
 const Bottom = styled.div`
