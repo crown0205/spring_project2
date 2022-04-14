@@ -24,7 +24,7 @@ const Header = props => {
   if (is_login && is_session) {
     return (
       <React.Fragment>
-        <Grid bg="#ffe0e0" is_flex fixed height="0px">
+        <Grid bg="#ffe0e0" is_flex fixed height="160px">
           <Grid
             is_flex
             padding="3px 16px"
@@ -75,7 +75,7 @@ const Header = props => {
 
   return (
     <React.Fragment>
-      <Grid bg="#ffe0e0" is_flex fixed height="0px" padding="3px 16px">
+      <Grid bg="#ffe0e0" is_flex fixed height="160px" padding="3px 16px">
         <Grid is_flex width="70%" margin="auto" bg="#ffe0e0">
           <Grid Minw="87px">
             <Font
@@ -118,6 +118,7 @@ const Header = props => {
 
 const Font = styled.div`
   font-family: "Jalnan";
+  font-size: 28px;
 `;
 
 Header.defaultProps = {};

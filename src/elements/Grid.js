@@ -70,7 +70,7 @@ const GridBox = styled.div`
   ${props => (props.margin ? `margin: ${props.margin};` : "")}
   ${props => (props.bg ? `background-color: ${props.bg};` : "")}
   ${props =>
-    props.fixed ? `height:100px; position:fixed; top:0; z-index:1;` : ""};
+    props.fixed ? `position:fixed; top:0; z-index:1;` : ""};
   ${props => (props.center ? `text-align: center;` : "")};
   ${props =>
     props.is_flex
