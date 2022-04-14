@@ -38,9 +38,7 @@ const CommentWrite = (props) =>{
 
     //로그인을 안했을 경우 댓글 입력창이 안보이도록 설정
 
-    //post_id , user_id, user_name, comment
-    //본인의 댓글만 삭제 가능하도록 설정
-    //(삭제기능 구현을 하게된다면..ㅎ)
+    //페이지 별로 댓글이 별개로 달려야함
     return(
         <React.Fragment>
                 <Grid padding="16px">

@@ -36,11 +36,11 @@ const PostDetail = (props) => {
     //commentloading 시작부분
   //1번 => comment.js 이동
 
-  // React.useEffect(()=>{
-  //   dispatch(commentActions.loadingCommentDB())
+  React.useEffect(()=>{
+    dispatch(commentActions.loadingCommentDB())
     
 
-  // },[]) 
+  },[]) 
 
   return (
     <React.Fragment>
