@@ -108,6 +108,8 @@ const getPostDB = () => {
 
         // console.log(post_list)
 
+        
+
 
         dispatch(setPost(posts.data));
 
@@ -146,10 +148,11 @@ export default handleActions(
   {
     [SET_POST]: (state, action) =>
       produce(state, draft => {
-        // console.log("여기~~!!!");
+        console.log("여기~~!!!");
+        console.log(action)
 
 
-        draft.list = action.payload.post_list
+        draft.list = action.payload.post_list.result
       }),
     [ADD_POST]: (state, action) =>
       produce(state, draft => {

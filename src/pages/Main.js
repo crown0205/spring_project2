@@ -31,8 +31,8 @@ const Main = props => {
             {/* <Menu /> */}
             <PostList>
               {post_list.map((item, index) => {
-                console.log(item);
-                return <Card key={`post${item.id}`} {...item} />;
+                // console.log(item);
+                return <Card key={`post${item.post_id}`} {...item} />;
               })}
               {/* <Card />
               <Card />

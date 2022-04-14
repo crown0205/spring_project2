@@ -17,16 +17,14 @@ const PostDetail = props => {
   //포스트 정보가 필요하다
   const post_id = props.match.params.id;
 
+
   const comments = useSelector(state => state.comment.list);
 
   const post_list = useSelector(state => state.post.list);
 
-  const post_idx = post_list.findIndex(p => p.id === post_id);
+  const post_idx = post_list.findIndex(p => p.post_id === +post_id);
 
   const post = post_list[post_idx];
-
-  console.log(post);
-
 
   React.useEffect(() => {
     console.log("useEffect~");
