@@ -9,6 +9,7 @@ import "moment";
 import moment from "moment";
 
 const CommentList = (props) => {
+
   // const postId = useSelector((state)=>state.comment.list[0].post_id);
   // console.log(postId);  
 
@@ -26,11 +27,13 @@ const CommentList = (props) => {
     dispatch(commentActions.loadingCommentDB())
   }, []);
 
+
+
   return (
     <React.Fragment>
       {/*8번 리덕스에서 뽑아낸 데이터 map으로 돌림 */}
-      {comment_box && comment_box.map((list,i)=>{
-          return <CommentItem key={i} {...list}/>//코멘트 아이디 
+      {comment_box && comment_box.map((list,k)=>{
+          return <CommentItem key={k} {...list}/>//코멘트 아이디 
         })}
     </React.Fragment>
   );
@@ -44,6 +47,11 @@ export default CommentList;
 
 //댓글 하나
 const CommentItem = (props) => {
+  const {commentbox} = props;
+  const dispatch = useDispatch()
+  const deleteComment = () => {
+    dispatch(commentActions.deleteCommentDB(commentbox));
+  };
   const { postId, user_id, user_name,comment} = props; //리덕스에서 가져옴
   return (
     <Grid padding="10px 20px">
@@ -59,7 +67,8 @@ const CommentItem = (props) => {
         <Grid width="10%">
         
         <Button bg="#eebab5" color="#fff" _onClick={()=>{
-          window.alert("댓글이 삭제되었습니다.!" )
+          // window.alert("댓글이 삭제되었습니다!")
+          deleteComment()
         }}>x</Button>
         </Grid>
       </Grid>

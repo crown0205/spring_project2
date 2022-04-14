@@ -10,6 +10,7 @@ import axios from "axios";
 const SET_COMMENT = "SET_COMMENT";
 const ADD_COMMENT = "ADD_COMMENT";
 
+const DELETE_COMMENT = "DELETE_COMMENT";
 //5번
 //액션타입에서 리듀서로 던짐
 
@@ -21,7 +22,9 @@ const setComment = createAction(SET_COMMENT, (commentlist) => ({
 const addComment = createAction(ADD_COMMENT, (commentWrap) => ({
   commentWrap,
 }));
-
+const deleteComment = createAction(DELETE_COMMENT, (commentbox) => ({
+  commentbox,
+}));
 //4번
 //액션함수에서 액션타입으로 던짐
 
@@ -51,29 +54,8 @@ const loadingCommentDB = () =>{
     }).then((docs)=>{
       //3번 dispatch로 액션함수한테 던짐
       // dispatch(loading(docs))
-
       console.log(docs.data);
       dispatch(setComment(docs.data))
-    //   let comment_list=[];
-    //   // console.log(docs.data.length);
-
-    //   docs.forEach((comment)=>{
-    //     console.log(comment)
-
-    //     comment_list.push({
-    //       postId:comment.postId,
-    //       user_id:comment.user_id,
-    //       user_name:comment.user_name,
-    //       comment:comment.comment,
-    //       createAt: moment().format("YYYY-MM-DD hh:mm:ss"),//시간
-    //     })
-    //   })
-    //   console.log(comment_list);
-    //   dispatch(loading(comment_list));
-    //   // const test1 = doc.data[0].comment
-    //   // const test2 = doc.data[0].user_name
-    //   // console.log(test1)
-    //   // console.log(test2)
     })
     }
   }
@@ -102,25 +84,41 @@ const addCommentDB = (user_name,comment) => {
   //   .catch(err=>{
   //   console.log("댓글 정보를 가져올 수가 없네요!")
   // })
-    const commentWrap = {postId:"pos3",user_id:"test3",user_name:user_name,comment:comment}
+    const commentWrap = {
+      postId:"pos3",user_id:"test3",user_name:user_name,comment:comment
+    }
     dispatch(addComment(commentWrap))
   }
 }
+//댓글 삭제
+const deleteCommentDB = (commentbox) => {
+  return function (dispatch, getState, { history }) {
+    axios({
+      method:"get",
+      url:"https://6253d1d889f28cf72b5335ef.mockapi.io/comments/",
+    }).then((docs)=>{
+      //3번 dispatch로 액션함수한테 던짐
+      // dispatch(loading(docs))
+      console.log(docs.data);
+      dispatch(deleteComment(commentbox))
+    })
+    }
+  }
+
 //리듀서
 export default handleActions(
   {
+    //댓글불러오기
     [SET_COMMENT]: (state, action) =>
       produce(state, (draft) => {
-        // let list=[];
-        // draft.list.push(...action.payload.comments);
         console.log(action.payload.commentlist)
         draft.list = action.payload.commentlist;
       }),
-
+      //댓글추가
     [ADD_COMMENT]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload.commentWrap) 
-        draft.list.push(action.payload.commentWrap);
+        draft.list.unshift(action.payload.commentWrap);
       }),
 
     //6번
@@ -134,7 +132,14 @@ export default handleActions(
         draft.list = action.payload.data;
       console.log(action);
       }),
-      
+
+    [DELETE_COMMENT]: (state, action) =>
+    produce(state, (draft) => {
+      let delete_comment_list = draft.list.filter(
+        (comment) => comment.commentbox !== action.payload.commentbox
+      );
+      draft.list = [...delete_comment_list];
+    }),
   },
   initialState);
 
@@ -143,7 +148,8 @@ const actionCreators = {
   addCommentDB,
   setComment,
   addComment,
-  loadingCommentDB
+  loadingCommentDB,
+  deleteCommentDB,
 };
 
 export { actionCreators };
