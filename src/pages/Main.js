@@ -56,12 +56,11 @@ const Main = props => {
 const MainWrap = styled.div``;
 
 const PostList = styled.div`
-  margin: 190px -15%;
+  margin: 200px -15%;
   @media screen and (max-width: 1024px) {
-    margin: 190px -10%;
+    margin: 190px -45%;
   }
   display: grid;
-  margin-top: 150px;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   justify-content: space-evenly;
   align-items: center;
